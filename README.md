@@ -4,7 +4,8 @@ COMP3004 group project
 - AED
 - Electrodes
 - Battery
-- Mainwindow
+- (Mainwindow)
+- Patient
 ## Design patterns
 
 
