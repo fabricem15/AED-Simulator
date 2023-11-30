@@ -14,7 +14,8 @@ public:
     void analyzeRhythm();
     void sendElectricShock();
     bool startSelfTest();
-
+    void powerOn();
+    void powerOff();
 
 
 signals:
@@ -25,6 +26,7 @@ public slots:
 private:
     int compressionDepth;
     int shockCount;
+    int elapsedTime;
 
 };
 

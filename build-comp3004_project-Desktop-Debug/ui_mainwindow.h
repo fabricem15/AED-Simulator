@@ -12,11 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -40,6 +42,9 @@ public:
     QPushButton *pushButton_4;
     QPushButton *pushButton_5;
     QPushButton *pushButton_6;
+    QFrame *line;
+    QLabel *label_6;
+    QTextEdit *textEdit;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -79,7 +84,7 @@ public:
         pushButton_7 = new QPushButton(widget_3);
         pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
         pushButton_7->setGeometry(QRect(180, 300, 161, 111));
-        pushButton_7->setStyleSheet(QString::fromUtf8("background-color:#b0abab;border-radius:30px; hover: white"));
+        pushButton_7->setStyleSheet(QString::fromUtf8("background-color:#b0abab;border-radius:30px;"));
         QIcon icon;
         icon.addFile(QString::fromUtf8("../Heart_icon.svg.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_7->setIcon(icon);
@@ -108,6 +113,17 @@ public:
         pushButton_6 = new QPushButton(widget_4);
         pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
         pushButton_6->setGeometry(QRect(80, 190, 131, 51));
+        line = new QFrame(widget_4);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setGeometry(QRect(27, 310, 491, 20));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+        label_6 = new QLabel(widget_4);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setGeometry(QRect(50, 340, 161, 51));
+        textEdit = new QTextEdit(widget_4);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setGeometry(QRect(50, 390, 271, 221));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -135,6 +151,7 @@ public:
         pushButton_4->setText(QCoreApplication::translate("MainWindow", "Start CPR", nullptr));
         pushButton_5->setText(QCoreApplication::translate("MainWindow", "Stop CPR", nullptr));
         pushButton_6->setText(QCoreApplication::translate("MainWindow", "Push harder", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "CONSOLE LOG", nullptr));
     } // retranslateUi
 
 };
