@@ -13,6 +13,7 @@ public:
 private:
     string rhythm;
     double weight;
+    string patientType;
 
 };
 
