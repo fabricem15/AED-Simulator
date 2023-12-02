@@ -13,9 +13,11 @@ public:
     AED();
     void analyzeRhythm();
     void sendElectricShock();
-    bool startSelfTest();
-    void powerOn();
-    void powerOff();
+    bool selfTest();
+    int getElapsedTime();
+    int getShockCount();
+    bool isShockableRhythm(int rhythm);
+
 
 
 signals:
@@ -27,6 +29,8 @@ private:
     int compressionDepth;
     int shockCount;
     int elapsedTime;
+//    int energyLevels[];
+    // must check the electrode pads connection at all times
 
 };
 
