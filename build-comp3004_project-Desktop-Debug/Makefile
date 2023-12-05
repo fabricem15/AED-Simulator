@@ -380,12 +380,14 @@ qrc_resource.cpp: ../comp3004_project/resource.qrc \
 		../comp3004_project/photos/ok.png \
 		../comp3004_project/photos/power-on-black.png \
 		../comp3004_project/photos/pads.png \
+		../comp3004_project/photos/power-on-red.png \
 		../comp3004_project/photos/CPR.png \
 		../comp3004_project/photos/Heart_icon.svg.png \
 		../comp3004_project/photos/test-failed.png \
 		../comp3004_project/photos/911.png \
 		../comp3004_project/photos/attach-pads.png \
 		../comp3004_project/photos/replace-battery.jpg \
+		../comp3004_project/photos/up-arrow.png \
 		../comp3004_project/photos/test-passed.png
 	/usr/lib/qt5/bin/rcc -name resource ../comp3004_project/resource.qrc -o qrc_resource.cpp
 

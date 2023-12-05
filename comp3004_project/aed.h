@@ -22,7 +22,7 @@ public:
     void switchPower();
 
 signals:
-
+    void voicePrompt(char *); // only the AED should send the voice prompt, it may read from battery or electrode but they may not communicate directly with the display
 
 public slots:
 

@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // init aed
-     AED* aed = new AED();
+    aed = new AED();
     batteryHealth = 100;
 
     // check timer here with the elapsed time
@@ -25,9 +25,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->progressBar->setValue(batteryHealth);
     connect(this, &MainWindow::updateBattery, ui->progressBar, &QProgressBar::setValue);
     connect(ui->powerBtn, &QPushButton::clicked, aed, &AED::switchPower);
+    connect(aed, &AED::voicePrompt, ui->voicePrompt, &QLabel::setText);
+
+//    connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::changePowerBtn);
 
 
-    ui->testFailed->hide();
+//    ui->testFailed->hide();
 
 //    QLabel *labels[];
 
@@ -35,7 +38,21 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 
+void MainWindow::changePowerBtn(){
+//    QPixmap pixmap(":photos/power-on-red.png");
+    QIcon icon (":/photos/power-on-red.png");
 
+    ui->powerBtn->setIcon(icon);
+    ui->powerBtn->setIconSize(QSize(40,40));
+
+}
+
+
+void MainWindow::setVoicePrompt(string text){
+
+    ui->voicePrompt->setText(QString::fromStdString(text));
+
+}
 
 void MainWindow::updateTime(){
     timeElapsed++;

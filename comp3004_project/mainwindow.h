@@ -24,12 +24,13 @@ signals:
 public slots:
     void updateTime();
     void updateShockCount();
-    //void
+    void changePowerBtn();
+    void setVoicePrompt(string text);
 //    void updateBattery();
 
 private:
     Ui::MainWindow *ui;
-    AED aed;
+    AED* aed;
     QTimer* timer;
     int timeElapsed;
     int batteryHealth;

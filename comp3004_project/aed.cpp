@@ -30,6 +30,11 @@ void AED::sendElectricShock(){
 
 
 }
+
+
+
+
+
 bool AED::selfTest(){
 
     // check the batteries
@@ -41,12 +46,19 @@ bool AED::selfTest(){
 void AED::switchPower(){
     on = !on;
     if (on){
+
+        // start timer here
+        // delay the execution of switches for the lights
         selfTest();
+        emit voicePrompt("power ON");
+
     }
     else {
         shockCount = 0;
         elapsedTime = 0;
     }
+
+
 
 }
 

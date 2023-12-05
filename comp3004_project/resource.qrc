@@ -11,5 +11,7 @@
         <file>photos/replace-battery.jpg</file>
         <file>photos/test-failed.png</file>
         <file>photos/test-passed.png</file>
+        <file>photos/power-on-red.png</file>
+        <file>photos/up-arrow.png</file>
     </qresource>
 </RCC>
