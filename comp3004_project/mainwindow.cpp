@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <stdio.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -8,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // init aed
-//     AED* aed = new AED();
+     AED* aed = new AED();
     batteryHealth = 100;
 
     // check timer here with the elapsed time
@@ -23,26 +24,31 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->progressBar->setValue(batteryHealth);
     connect(this, &MainWindow::updateBattery, ui->progressBar, &QProgressBar::setValue);
+    connect(ui->powerBtn, &QPushButton::clicked, aed, &AED::switchPower);
+
+
+    ui->testFailed->hide();
+
+//    QLabel *labels[];
 
 
 }
 
 
+
+
 void MainWindow::updateTime(){
-    //time++;
     timeElapsed++;
 
-    QString text;
 
     int minutes = timeElapsed / 60;
-
     int seconds = timeElapsed % 60;
 
-    text = minutes + ": " + seconds;
+    char s[8];
 
-//    text.append(timeElapsed);
-    text.setNum(timeElapsed);
-    ui->elapsedTime->setText(text);
+    sprintf(s, "%02d: %02d", minutes, seconds);
+
+    ui->elapsedTime->setText(s);
 
     batteryHealth = batteryHealth - 10;
 

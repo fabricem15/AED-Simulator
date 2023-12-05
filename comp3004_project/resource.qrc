@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>photos/don't touch.png</file>
+        <file>photos/Heart_icon.svg.png</file>
+        <file>photos/ok.png</file>
+        <file>photos/pads.png</file>
+        <file>photos/911.png</file>
+        <file>photos/CPR.png</file>
+        <file>photos/power-on-black.png</file>
+        <file>photos/attach-pads.png</file>
+        <file>photos/replace-battery.jpg</file>
+        <file>photos/test-failed.png</file>
+        <file>photos/test-passed.png</file>
+    </qresource>
+</RCC>

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <stdio.h>
 #include "aed.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,11 +19,12 @@ public:
     ~MainWindow();
 
 signals:
-    void updateBattery(int value);
+    void updateBattery(int value); // ?? why not use a slot
 
 public slots:
     void updateTime();
     void updateShockCount();
+    //void
 //    void updateBattery();
 
 private:

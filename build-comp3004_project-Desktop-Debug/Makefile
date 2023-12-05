@@ -57,7 +57,8 @@ SOURCES       = ../comp3004_project/aed.cpp \
 		../comp3004_project/electrode.cpp \
 		../comp3004_project/main.cpp \
 		../comp3004_project/mainwindow.cpp \
-		../comp3004_project/patient.cpp moc_aed.cpp \
+		../comp3004_project/patient.cpp qrc_resource.cpp \
+		moc_aed.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = aed.o \
 		battery.o \
@@ -65,6 +66,7 @@ OBJECTS       = aed.o \
 		main.o \
 		mainwindow.o \
 		patient.o \
+		qrc_resource.o \
 		moc_aed.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -244,7 +246,8 @@ Makefile: ../comp3004_project/comp3004_project.pro /usr/lib/x86_64-linux-gnu/qt5
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		../comp3004_project/comp3004_project.pro
+		../comp3004_project/comp3004_project.pro \
+		../comp3004_project/resource.qrc
 	$(QMAKE) -o Makefile ../comp3004_project/comp3004_project.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf:
@@ -325,6 +328,7 @@ Makefile: ../comp3004_project/comp3004_project.pro /usr/lib/x86_64-linux-gnu/qt5
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../comp3004_project/comp3004_project.pro:
+../comp3004_project/resource.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../comp3004_project/comp3004_project.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -339,6 +343,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../comp3004_project/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../comp3004_project/aed.h ../comp3004_project/battery.h ../comp3004_project/electrode.h ../comp3004_project/mainwindow.h ../comp3004_project/patient.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../comp3004_project/aed.cpp ../comp3004_project/battery.cpp ../comp3004_project/electrode.cpp ../comp3004_project/main.cpp ../comp3004_project/mainwindow.cpp ../comp3004_project/patient.cpp $(DISTDIR)/
@@ -366,8 +371,24 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resource.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resource.cpp
+qrc_resource.cpp: ../comp3004_project/resource.qrc \
+		/usr/lib/qt5/bin/rcc \
+		../comp3004_project/photos/don't\ touch.png \
+		../comp3004_project/photos/ok.png \
+		../comp3004_project/photos/power-on-black.png \
+		../comp3004_project/photos/pads.png \
+		../comp3004_project/photos/CPR.png \
+		../comp3004_project/photos/Heart_icon.svg.png \
+		../comp3004_project/photos/test-failed.png \
+		../comp3004_project/photos/911.png \
+		../comp3004_project/photos/attach-pads.png \
+		../comp3004_project/photos/replace-battery.jpg \
+		../comp3004_project/photos/test-passed.png
+	/usr/lib/qt5/bin/rcc -name resource ../comp3004_project/resource.qrc -o qrc_resource.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -383,6 +404,7 @@ moc_aed.cpp: ../comp3004_project/aed.h \
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/aed.h -o moc_aed.cpp
 
 moc_mainwindow.cpp: ../comp3004_project/mainwindow.h \
+		../comp3004_project/aed.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/mainwindow.h -o moc_mainwindow.cpp
@@ -404,7 +426,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -417,15 +439,20 @@ battery.o: ../comp3004_project/battery.cpp ../comp3004_project/battery.h
 electrode.o: ../comp3004_project/electrode.cpp ../comp3004_project/electrode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o electrode.o ../comp3004_project/electrode.cpp
 
-main.o: ../comp3004_project/main.cpp ../comp3004_project/mainwindow.h
+main.o: ../comp3004_project/main.cpp ../comp3004_project/mainwindow.h \
+		../comp3004_project/aed.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../comp3004_project/main.cpp
 
 mainwindow.o: ../comp3004_project/mainwindow.cpp ../comp3004_project/mainwindow.h \
+		../comp3004_project/aed.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../comp3004_project/mainwindow.cpp
 
 patient.o: ../comp3004_project/patient.cpp ../comp3004_project/patient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o patient.o ../comp3004_project/patient.cpp
+
+qrc_resource.o: qrc_resource.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
 
 moc_aed.o: moc_aed.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_aed.o moc_aed.cpp

@@ -17,8 +17,9 @@ public:
     int getElapsedTime();
     int getShockCount();
     bool isShockableRhythm(int rhythm);
-
-
+    bool isTurnedOn();
+    void checkCompressionDepth();
+    void switchPower();
 
 signals:
 
@@ -29,6 +30,7 @@ private:
     int compressionDepth;
     int shockCount;
     int elapsedTime;
+    bool on;
 //    int energyLevels[];
     // must check the electrode pads connection at all times
 
