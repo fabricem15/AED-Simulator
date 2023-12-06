@@ -2,6 +2,9 @@
 #define AED_H
 #include <QObject>
 #include <iostream>
+#include <QTimer>
+//#include "battery.h"
+//#include "electrode.h"
 
 using namespace std;
 
@@ -11,24 +14,42 @@ class AED: public QObject{
 
 public:
     AED();
+
+
+    bool selfTest();
+    int getShockCount();
+    int getActiveButton();
+    int getActiveLightIndex();
+    bool isShockableRhythm(int rhythm);
+    bool isTurnedOn();
+    void checkCompressionDepth();
+    void switchPower();
+    void checkResponsiveness();
+    void callHelp();
+    void attachPads();
     void analyzeRhythm();
     void sendElectricShock();
-    bool selfTest();
-    int getElapsedTime();
-    int getShockCount();
-    bool isShockableRhythm(int rhythm);
 
 
+//    battery* getBattery();
+//    electrode* getElectrode();
 
 signals:
-
+    void voicePrompt(string text); // only the AED should send the voice prompt, it may read from battery or electrode but they may not communicate directly with the display
+    void lightNumberChanged(int lightNumber); // signal to the mainwindow to stop flashing previous light indicator
 
 public slots:
 
 private:
     int compressionDepth;
     int shockCount;
-    int elapsedTime;
+    bool isOn;
+    int lightNumber;
+    QTimer* timer;
+
+  /*  battery* battery1*/;
+//    electrode* el;
+
 //    int energyLevels[];
     // must check the electrode pads connection at all times
 

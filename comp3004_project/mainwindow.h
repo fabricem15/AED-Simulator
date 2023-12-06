@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QLabel>
+#include <stdio.h>
 #include "aed.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,20 +19,22 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-signals:
-    void updateBattery(int value);
 
 public slots:
     void updateTime();
     void updateShockCount();
-//    void updateBattery();
+    void changePowerBtn();
+    void setVoicePrompt(string text);
+    void setBattery(int charge);
+    void turnOffPreviousLight(int index);
+
 
 private:
     Ui::MainWindow *ui;
-    AED aed;
+    AED* aed;
     QTimer* timer;
     int timeElapsed;
-    int batteryHealth;
+    QVector<QLabel*> indicatorLabels;
 
 };
 #endif // MAINWINDOW_H
