@@ -24,6 +24,7 @@ public:
     int electrodeType;
     bool isConnected;
     int today = 20231130;
+    string patientType; // adding this just so that the code runs, delete later
 
 };
 #endif // ELECTRODES_H

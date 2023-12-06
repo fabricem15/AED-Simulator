@@ -57,7 +57,8 @@ SOURCES       = ../comp3004_project/aed.cpp \
 		../comp3004_project/electrode.cpp \
 		../comp3004_project/main.cpp \
 		../comp3004_project/mainwindow.cpp \
-		../comp3004_project/patient.cpp qrc_resource.cpp \
+		../comp3004_project/patient.cpp \
+		../comp3004_project/voiceprompts.cpp qrc_resource.cpp \
 		moc_aed.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = aed.o \
@@ -66,6 +67,7 @@ OBJECTS       = aed.o \
 		main.o \
 		mainwindow.o \
 		patient.o \
+		voiceprompts.o \
 		qrc_resource.o \
 		moc_aed.o \
 		moc_mainwindow.o
@@ -151,12 +153,14 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../comp3004_project/battery.h \
 		../comp3004_project/electrode.h \
 		../comp3004_project/mainwindow.h \
-		../comp3004_project/patient.h ../comp3004_project/aed.cpp \
+		../comp3004_project/patient.h \
+		../comp3004_project/voiceprompts.h ../comp3004_project/aed.cpp \
 		../comp3004_project/battery.cpp \
 		../comp3004_project/electrode.cpp \
 		../comp3004_project/main.cpp \
 		../comp3004_project/mainwindow.cpp \
-		../comp3004_project/patient.cpp
+		../comp3004_project/patient.cpp \
+		../comp3004_project/voiceprompts.cpp
 QMAKE_TARGET  = comp3004_project
 DESTDIR       = 
 TARGET        = comp3004_project
@@ -345,8 +349,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../comp3004_project/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../comp3004_project/aed.h ../comp3004_project/battery.h ../comp3004_project/electrode.h ../comp3004_project/mainwindow.h ../comp3004_project/patient.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../comp3004_project/aed.cpp ../comp3004_project/battery.cpp ../comp3004_project/electrode.cpp ../comp3004_project/main.cpp ../comp3004_project/mainwindow.cpp ../comp3004_project/patient.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../comp3004_project/aed.h ../comp3004_project/battery.h ../comp3004_project/electrode.h ../comp3004_project/mainwindow.h ../comp3004_project/patient.h ../comp3004_project/voiceprompts.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../comp3004_project/aed.cpp ../comp3004_project/battery.cpp ../comp3004_project/electrode.cpp ../comp3004_project/main.cpp ../comp3004_project/mainwindow.cpp ../comp3004_project/patient.cpp ../comp3004_project/voiceprompts.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../comp3004_project/mainwindow.ui $(DISTDIR)/
 
 
@@ -435,10 +439,17 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 aed.o: ../comp3004_project/aed.cpp ../comp3004_project/aed.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aed.o ../comp3004_project/aed.cpp
 
-battery.o: ../comp3004_project/battery.cpp ../comp3004_project/battery.h
+battery.o: ../comp3004_project/battery.cpp ../comp3004_project/Battery.h \
+		../comp3004_project/Patient.h \
+		../comp3004_project/Electrode.h \
+		../comp3004_project/patient.h \
+		../comp3004_project/voiceprompts.h \
+		../comp3004_project/VoicePrompts.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o battery.o ../comp3004_project/battery.cpp
 
-electrode.o: ../comp3004_project/electrode.cpp ../comp3004_project/electrode.h
+electrode.o: ../comp3004_project/electrode.cpp ../comp3004_project/electrode.h \
+		../comp3004_project/patient.h \
+		../comp3004_project/voiceprompts.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o electrode.o ../comp3004_project/electrode.cpp
 
 main.o: ../comp3004_project/main.cpp ../comp3004_project/mainwindow.h \
@@ -450,8 +461,11 @@ mainwindow.o: ../comp3004_project/mainwindow.cpp ../comp3004_project/mainwindow.
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../comp3004_project/mainwindow.cpp
 
-patient.o: ../comp3004_project/patient.cpp ../comp3004_project/patient.h
+patient.o: ../comp3004_project/patient.cpp ../comp3004_project/Patient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o patient.o ../comp3004_project/patient.cpp
+
+voiceprompts.o: ../comp3004_project/voiceprompts.cpp ../comp3004_project/voiceprompts.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o voiceprompts.o ../comp3004_project/voiceprompts.cpp
 
 qrc_resource.o: qrc_resource.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp

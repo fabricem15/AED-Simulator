@@ -23,8 +23,13 @@ private:
 #ifndef PATIENT_H
 #define PATIENT_H
 #include "string.h"
-class Patient{
-    
+#include <QObject>
+using namespace std;
+
+class Patient: public QObject{
+
+     Q_OBJECT
+
     public:
         Patient();
         Patient(int age, int weight);
@@ -37,7 +42,7 @@ class Patient{
         int age;
         int weight;
         int bpm;
-        string patientType;
+
 };
 
 #endif // PATIENT_H

@@ -28,6 +28,7 @@ public:
 #ifndef BATTERY_H
 #define BATTERY_H
 #include "Patient.h"
+#include <QObject>
 #include "Electrode.h"
 #include "VoicePrompts.h"
 #include "QtDebug"
