@@ -41,7 +41,7 @@ class Battery{
         int getCharge();
         bool replaceBattery();
         void resetBattery();
-        //void selfTest();
+        bool selfTest();
 
     private:
         int charge;
