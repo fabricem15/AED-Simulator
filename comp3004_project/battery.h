@@ -6,16 +6,20 @@
 
 using namespace std;
 
-class battery
-{
+class battery: public QObject{
+
+    Q_OBJECT
+
 public:
-    battery();
+       battery();
+       void decreaseBattery();
+       int getCharge();
+       bool replaceBattery();
+       void resetBattery();
+       //void selfTest();
 
-
-private:
-    int remainingCapacity;
-    string batteryType;
-    string expirationDate;
+   private:
+       int charge;
 };
 
 #endif // BATTERY_H

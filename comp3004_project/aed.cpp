@@ -2,15 +2,39 @@
 
 AED::AED()
 {
-    on = false;
+    isOn = false;
+    lightNumber =0;
 }
 
 
-// might have to check the state everytime
 
+void AED::checkResponsiveness(){
+    emit voicePrompt("CHECK RESPONSIVENESS");
+    QTimer::singleShot(5000, this, &AED::callHelp);
+}
+void AED::callHelp(){
+    emit lightNumberChanged(lightNumber);
+    lightNumber++;
+    emit voicePrompt("CALL FOR HELP");
+    QTimer::singleShot(5000, this, &AED::attachPads);
+}
+void AED::attachPads(){
+    emit lightNumberChanged(lightNumber);
+    lightNumber++;
+    //if (0)// check if the pads are actually attached, check if the button has been clicked
+
+    emit voicePrompt("ATTACH PADS");
+    QTimer::singleShot(5000, this, &AED::analyzeRhythm);
+}
 void AED::analyzeRhythm(){
-
+    emit lightNumberChanged(lightNumber);
+    lightNumber++;
+    // if shockable
+    emit voicePrompt("ANALYZING");
+   // QTimer::singleShot(2000, this, &AED::sendElectricShock);
 }
+
+
 
 void AED::sendElectricShock(){
 
@@ -24,55 +48,58 @@ void AED::sendElectricShock(){
         // decrease battery here by 20% or something
     }
 
+//    energyLevel += 0;
+
     // pass the energy level to the electrode class
     shockCount++;
 
 
-
 }
-
-
-
 
 
 bool AED::selfTest(){
 
     // check the batteries
 
-    // emit a success signal as well that will turn activate that icon
+    // emit a success signal as well that will turn activate the proper icon
+    // if it fails display unit failed and do not proceed with the other voice prompts
+
+//    if (0){
+//        voicePrompt("UNIT OK");
+//    }
+
+    emit voicePrompt("Power ON");
+    checkResponsiveness();
+
+
     return true;
 }
 
 void AED::switchPower(){
-    on = !on;
-    if (on){
-
-        // start timer here
-        // delay the execution of switches for the lights
-        selfTest();
-        emit voicePrompt("power ON");
+    isOn = !isOn;
+    if (isOn){
+        // we can use a single shot timer to delay execution and allow time to show indicator light flashing and changing of steps and
+        QTimer::singleShot(1000, this, &AED::selfTest);
 
     }
-    else {
+    else { // reset variables on power off
         shockCount = 0;
-        elapsedTime = 0;
+
     }
-
-
 
 }
 
-int AED::getElapsedTime(){
-    return elapsedTime;
+int AED::getActiveLightIndex(){
+    return lightNumber;
 }
 int AED::getShockCount(){
     return shockCount;
 }
 bool AED::isShockableRhythm(int rhythm){
-    return rhythm < 70 || rhythm > 150;
+    return rhythm < 70 || rhythm > 150; // change this later
 }
 
 bool AED::isTurnedOn(){
-    return on;
+    return isOn;
 }
 

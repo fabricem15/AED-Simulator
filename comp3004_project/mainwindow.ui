@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QWidget" name="aedWidget" native="true">
     <property name="geometry">
      <rect>
       <x>-10</x>
@@ -110,7 +110,7 @@
          <string/>
         </property>
        </widget>
-       <widget class="QProgressBar" name="progressBar_2">
+       <widget class="QProgressBar" name="compression">
         <property name="geometry">
          <rect>
           <x>230</x>
@@ -157,7 +157,7 @@
         <rect>
          <x>180</x>
          <y>270</y>
-         <width>131</width>
+         <width>121</width>
          <height>111</height>
         </rect>
        </property>
@@ -176,6 +176,23 @@
          <width>75</width>
          <height>69</height>
         </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="light5">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>314</y>
+         <width>16</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:grey;border-radius:8px;
+</string>
+       </property>
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </widget>
@@ -210,7 +227,7 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QProgressBar" name="progressBar">
+    <widget class="QProgressBar" name="battery">
      <property name="geometry">
       <rect>
        <x>700</x>
@@ -223,7 +240,7 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="value">
-      <number>86</number>
+      <number>100</number>
      </property>
      <property name="textVisible">
       <bool>true</bool>
@@ -312,7 +329,7 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="light3">
+    <widget class="QLabel" name="light4">
      <property name="geometry">
       <rect>
        <x>710</x>
@@ -329,10 +346,10 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="light4">
+    <widget class="QLabel" name="light3">
      <property name="geometry">
       <rect>
-       <x>740</x>
+       <x>733</x>
        <y>370</y>
        <width>16</width>
        <height>16</height>
@@ -371,7 +388,7 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:#737889;border-radius:20px</string>
+       <string notr="true">background-color:#737569;border-radius:20px</string>
       </property>
       <property name="text">
        <string/>
@@ -519,12 +536,12 @@
     <zorder>label_7</zorder>
     <zorder>widget_2</zorder>
     <zorder>label_3</zorder>
-    <zorder>progressBar</zorder>
+    <zorder>battery</zorder>
     <zorder>label_8</zorder>
     <zorder>label_9</zorder>
     <zorder>light2</zorder>
-    <zorder>light3</zorder>
     <zorder>light4</zorder>
+    <zorder>light3</zorder>
     <zorder>widget_4</zorder>
     <zorder>widget_5</zorder>
     <zorder>label_5</zorder>
@@ -566,7 +583,7 @@
       <string>USER ACTIONS</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="placeElectrodes">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -592,7 +609,7 @@
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_4">
+    <widget class="QPushButton" name="doCPR">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -663,7 +680,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_8">
+    <widget class="QPushButton" name="replaceBatteries">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -815,7 +832,7 @@
   <connection>
    <sender>horizontalSlider</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>progressBar_2</receiver>
+   <receiver>compression</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
