@@ -36,6 +36,11 @@ int Battery::getCharge(){
     return charge;
 }
 
+//if the batteries have enough charge inside initially
 bool Battery::selfTest(){
-    return charge > 10;// ** review this
+    if (charge < 50){
+        return false;
+    }
+
+    return true;
 }

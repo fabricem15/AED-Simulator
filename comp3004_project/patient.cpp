@@ -7,9 +7,10 @@
 //    bpm = 0;
 //}
 
-Patient::Patient(int age, int weight){
+Patient::Patient(int age, int weight, int bpm){
     this->age = age;
     this->weight = weight;
+    this->bpm = bpm;
 }
 
 bool Patient::isChild(){

@@ -10,7 +10,7 @@ class Patient: public QObject{
 
     public:
         Patient();
-        Patient(int age, int weight);
+        Patient(int age, int weight, int bpm);
         bool isChild();
         bool isAdult();
         bool shockableHeartRate();
