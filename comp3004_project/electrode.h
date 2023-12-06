@@ -1,20 +1,29 @@
-#ifndef ELECTRODE_H
-#define ELECTRODE_H
-#include <iostream>
+#ifndef ELECTRODES_H
+#define ELECTRODES_H
+#include "patient.h"
+#include "voiceprompts.h"
+
 #include <QObject>
+#include <iostream>
 
 using namespace std;
-class electrode
+
+
+class Electrodes: public Patient, public VoicePrompts
 {
 public:
-    electrode();
+    Electrodes();
+    void cprDisplacement();
+    void checkPlacement();
+    bool heartAnalysis();
 
-
-private:
-    string electrodeType;
-    string expirationDate;
+    int heartrate;
+    int compressions;
+    int shockCount;
+    int expirationDate = 20241130;
+    int electrodeType;
     bool isConnected;
+    int today = 20231130;
 
 };
-
-#endif // ELECTRODE_H
+#endif // ELECTRODES_H
