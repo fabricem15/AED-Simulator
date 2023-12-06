@@ -1,4 +1,4 @@
-#include "electrodes.h"
+#include "electrode.h"
 
 #include "QThread"
 #include "QtDebug"

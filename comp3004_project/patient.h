@@ -22,7 +22,7 @@ private:
 
 #ifndef PATIENT_H
 #define PATIENT_H
-
+#include "string.h"
 class Patient{
     
     public:
@@ -37,6 +37,7 @@ class Patient{
         int age;
         int weight;
         int bpm;
+        string patientType;
 };
 
 #endif // PATIENT_H
