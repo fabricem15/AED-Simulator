@@ -81,10 +81,13 @@
          </font>
         </property>
         <property name="text">
-         <string>CHECK RESPONSIVENESS</string>
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="shockLbl">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -101,7 +104,7 @@
         <property name="geometry">
          <rect>
           <x>210</x>
-          <y>0</y>
+          <y>4</y>
           <width>51</width>
           <height>31</height>
          </rect>
@@ -315,8 +318,8 @@
     <widget class="QLabel" name="light2">
      <property name="geometry">
       <rect>
-       <x>430</x>
-       <y>140</y>
+       <x>429</x>
+       <y>138</y>
        <width>16</width>
        <height>16</height>
       </rect>
@@ -388,7 +391,7 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:#737569;border-radius:20px</string>
+       <string notr="true">background-color:red;border-radius:20px</string>
       </property>
       <property name="text">
        <string/>
@@ -436,7 +439,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="label_15">
+     <widget class="QLabel" name="testPassed">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -485,7 +488,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:orange;border-radius:8px;
+      <string notr="true">background-color:grey;border-radius:8px;
 </string>
      </property>
      <property name="text">
@@ -533,6 +536,45 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>710</y>
+       <width>121</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="resource.qrc">:/resources/photos/CPR-icon.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="light6">
+     <property name="geometry">
+      <rect>
+       <x>58</x>
+       <y>718</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:grey;border-radius:8px;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
     <zorder>label_7</zorder>
     <zorder>widget_2</zorder>
     <zorder>label_3</zorder>
@@ -548,6 +590,8 @@
     <zorder>light1</zorder>
     <zorder>label_10</zorder>
     <zorder>label_11</zorder>
+    <zorder>label_12</zorder>
+    <zorder>light6</zorder>
    </widget>
    <widget class="QWidget" name="slider" native="true">
     <property name="geometry">
@@ -581,6 +625,9 @@
      </property>
      <property name="text">
       <string>USER ACTIONS</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QPushButton" name="placeElectrodes">
@@ -656,6 +703,9 @@
      <property name="text">
       <string>SCENARIO CONTROL</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="Line" name="line">
      <property name="geometry">
@@ -668,16 +718,6 @@
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>540</y>
-       <width>86</width>
-       <height>25</height>
-      </rect>
      </property>
     </widget>
     <widget class="QPushButton" name="replaceBatteries">
@@ -772,6 +812,68 @@
      <property name="text">
       <string>0</string>
      </property>
+    </widget>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>510</y>
+       <width>211</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <widget class="QRadioButton" name="radioButton_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Adult with high BPM</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>151</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Adult with low BPM</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>181</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Child with irregular BPM</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>220</y>
+        <width>83</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>RESET</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="Line" name="line_2">

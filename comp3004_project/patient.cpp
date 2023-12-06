@@ -1,6 +1,11 @@
-#include "Patient.h"
+#include "patient.h"
 
-Patient::Patient(){}
+
+//Patient::Patient(){
+//    weight = 0;
+//    age = 0;
+//    bpm = 0;
+//}
 
 Patient::Patient(int age, int weight){
     this->age = age;

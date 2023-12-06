@@ -13,5 +13,6 @@
         <file>photos/test-passed.png</file>
         <file>photos/power-on-red.png</file>
         <file>photos/up-arrow.png</file>
+        <file>photos/CPR-icon.png</file>
     </qresource>
 </RCC>

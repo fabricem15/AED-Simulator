@@ -15,33 +15,38 @@ MainWindow::MainWindow(QWidget *parent)
     // elapsed time timer
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTime);
-    timer->start(1000);
+
 
 //    ui->progressBar->setValue(batteryHealth);
 //    connect(this, &MainWindow::setBattery, ui->progressBar, &QProgressBar::setValue);// connect the battery update from the aed's battery object to the above slot for the progress bar
 
     connect(ui->powerBtn, &QPushButton::clicked, aed, &AED::switchPower);
+    connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::switchPowerBtn);
     connect(aed, &AED::voicePrompt, this, &MainWindow::setVoicePrompt);
     connect(aed, &AED::lightNumberChanged, this, &MainWindow::turnOffPreviousLight);
 
 
+    connect(ui->placeElectrodes, &QPushButton::clicked, aed->getElectrodes(), &Electrodes::attachPads);
 
 
+     ui->testPassed->hide();
+     ui->testFailed->hide();
+     ui->shockCount->hide();
+     ui->shockLbl->hide();
 
-    for (int i = 0; i < 5; i++){
+     connect(aed, &AED::selfTestPassed, this, &MainWindow::showStatusIndicator);
+
+
+    for (int i = 0; i < 5; i++){ // set up indicator lights
         char s[8];
         sprintf(s, "light%d", i+1);
-
-//        cout << s << endl;
-
         QLabel* lbl= ui->aedWidget->findChild<QLabel*>(s);
-
-        cout << lbl->objectName().toStdString() << endl;
         indicatorLabels.push_back(lbl);
     }
 
-//    connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::changePowerBtn);
 
+    // shock count update
+    connect(aed, &AED::shockCountIncreased, this, &MainWindow::updateShockCount);
 
 //    ui->testFailed->hide();
 
@@ -50,14 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 
-void MainWindow::changePowerBtn(){
-//    QPixmap pixmap(":photos/power-on-red.png");
-    QIcon icon (":/photos/power-on-red.png");
-
-    ui->powerBtn->setIcon(icon);
-    ui->powerBtn->setIconSize(QSize(40,40));
-
-}
 
 void MainWindow::setBattery(int charge){
     ui->battery->setValue(charge);
@@ -65,7 +62,6 @@ void MainWindow::setBattery(int charge){
 
 void MainWindow::setVoicePrompt(string text){
     ui->voicePrompt->setText(QString::fromStdString(text));
-    //indicatorLabels[0]->setStyleSheet("background-color:grey;border-radius:8px;");
 }
 
 void MainWindow::updateTime(){
@@ -84,12 +80,31 @@ void MainWindow::updateTime(){
 
 }
 
-void MainWindow::updateShockCount(){
-    ui->shockCount->setText("00");
+void MainWindow::updateShockCount(int shockCount){
+
+    char s[3];
+    sprintf(s, "%02d", shockCount);
+    ui->shockCount->setText(s); // change this to the actual shockCount
 }
 
 void MainWindow::turnOffPreviousLight(int index){
     indicatorLabels[index]->setStyleSheet("background-color:grey;border-radius:8px;");
+}
+
+void MainWindow::showStatusIndicator(bool passedTest){
+    if (passedTest){
+        ui->testPassed->show();
+    }
+    else {
+        ui->testFailed->show();
+    }
+}
+
+void MainWindow::switchPowerBtn(){
+    ui->powerBtn->setStyleSheet("background-color:green;border-radius:20px");
+    timer->start(1000);
+    ui->shockCount->show();
+    ui->shockLbl->show();
 }
 
 MainWindow::~MainWindow()

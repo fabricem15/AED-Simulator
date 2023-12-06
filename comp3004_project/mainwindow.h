@@ -22,12 +22,12 @@ public:
 
 public slots:
     void updateTime();
-    void updateShockCount();
-    void changePowerBtn();
+    void updateShockCount(int shockCount);
     void setVoicePrompt(string text);
     void setBattery(int charge);
     void turnOffPreviousLight(int index);
-
+    void showStatusIndicator(bool passedTest);
+    void switchPowerBtn();
 
 private:
     Ui::MainWindow *ui;

@@ -1,39 +1,17 @@
-/*#ifndef BATTERY_H
+#ifndef BATTERY_H
 #define BATTERY_H
-#include <iostream>
+//#include pPatient.h"
 #include <QObject>
+#include <iostream>
 
+//#include "Electrode.h"
+//#include "VoicePrompts.h"
+#include "QtDebug"
 
 using namespace std;
 
-class battery: public QObject{
-
+class Battery: public QObject{
     Q_OBJECT
-
-public:
-       battery();
-       void decreaseBattery();
-       int getCharge();
-       bool replaceBattery();
-       void resetBattery();
-       //void selfTest();
-
-   private:
-       int charge;
-};
-
-#endif // BATTERY_H
-*/
-
-#ifndef BATTERY_H
-#define BATTERY_H
-#include "Patient.h"
-#include <QObject>
-#include "Electrode.h"
-#include "VoicePrompts.h"
-#include "QtDebug"
-
-class Battery{
 
     public:
         Battery();
@@ -41,13 +19,16 @@ class Battery{
         int getCharge();
         bool replaceBattery();
         void resetBattery();
-        //void selfTest();
+        bool selfTest();
+    signals:
+
+    public slots:
 
     private:
         int charge;
-        Electrodes electrode;
-        Patient p;
-        VoicePrompts vp;
+     //   Electrodes electrode;
+    //    Patient p;
+      //  VoicePrompts vp;
     
 };
 

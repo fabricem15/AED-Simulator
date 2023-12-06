@@ -4,8 +4,12 @@ AED::AED()
 {
     isOn = false;
     lightNumber =0;
-}
+    battery = new Battery();
+    electrodes = new Electrodes();
 
+    connect(electrodes, &Electrodes::attachPads, this, &AED::electrodesON);
+
+}
 
 
 void AED::checkResponsiveness(){
@@ -21,38 +25,55 @@ void AED::callHelp(){
 void AED::attachPads(){
     emit lightNumberChanged(lightNumber);
     lightNumber++;
-    //if (0)// check if the pads are actually attached, check if the button has been clicked
 
     emit voicePrompt("ATTACH PADS");
-    QTimer::singleShot(5000, this, &AED::analyzeRhythm);
+
+    // call this when the electrodes have been placed
+
+    //QTimer::singleShot(5000, this, &AED::analyzeRhythm);
 }
 void AED::analyzeRhythm(){
     emit lightNumberChanged(lightNumber);
     lightNumber++;
     // if shockable
     emit voicePrompt("ANALYZING");
-   // QTimer::singleShot(2000, this, &AED::sendElectricShock);
+   QTimer::singleShot(2000, this, &AED::sendElectricShock);
 }
+
+
+
 
 
 
 void AED::sendElectricShock(){
 
     // if AED is on and shockable rhythm is detected
+    // in the function to handle button click, make sure that it only activates after the machine has been turned on
+    if (!isTurnedOn())
+        return;
 
+
+    emit lightNumberChanged(lightNumber);
+    lightNumber++;
+    emit voicePrompt("STAND CLEAR");
     // get rhythm from the electrodes
-    if (isTurnedOn() && isShockableRhythm(218)) // also check if the electrode pads are attached {
+    if (isTurnedOn() && isShockableRhythm(218))
+
     {
+        //check if the electrode pads are attached
         // emit signal to electrode to deliver shock to the victim,
         // the patient class should then receive the shock and improve the condition by a factor of the energy level
-        // decrease battery here by 20% or something
+        // decrease battery here
+        //battery->decreaseBattery();
     }
 
 //    energyLevel += 0;
 
     // pass the energy level to the electrode class
-    shockCount++;
 
+    // change this when the user actually presses the shock button
+    shockCount++;
+    shockCountIncreased(shockCount);
 
 }
 
@@ -60,7 +81,21 @@ void AED::sendElectricShock(){
 bool AED::selfTest(){
 
     // check the batteries
+    bool unitOk = true;
 
+    unitOk = battery->selfTest();
+
+    if (battery->selfTest()){
+
+        emit voicePrompt("UNIT OK");
+        emit selfTestPassed(true);
+         QTimer::singleShot(2000, this, &AED::checkResponsiveness);
+//       checkResponsiveness();
+    }
+    else {
+        emit selfTestPassed(false);
+        emit voicePrompt("UNIT FAILED");
+    }
     // emit a success signal as well that will turn activate the proper icon
     // if it fails display unit failed and do not proceed with the other voice prompts
 
@@ -68,8 +103,6 @@ bool AED::selfTest(){
 //        voicePrompt("UNIT OK");
 //    }
 
-    emit voicePrompt("Power ON");
-    checkResponsiveness();
 
 
     return true;
@@ -89,6 +122,18 @@ void AED::switchPower(){
 
 }
 
+void AED::electrodesON(){
+
+    analyzeRhythm();
+    //QTimer::singleShot(5000, this, &AED::analyzeRhythm);
+}
+
+Electrodes* AED::getElectrodes(){
+    return electrodes;
+}
+Battery* AED::getBattery(){
+    return battery;
+}
 int AED::getActiveLightIndex(){
     return lightNumber;
 }

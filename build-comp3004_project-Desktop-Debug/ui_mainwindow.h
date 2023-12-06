@@ -12,13 +12,13 @@
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -34,7 +34,7 @@ public:
     QWidget *widget_3;
     QWidget *widget_7;
     QLabel *voicePrompt;
-    QLabel *label_4;
+    QLabel *shockLbl;
     QLabel *elapsedTime;
     QProgressBar *compression;
     QLabel *shockCount;
@@ -52,22 +52,28 @@ public:
     QPushButton *powerBtn;
     QWidget *widget_5;
     QLabel *testFailed;
-    QLabel *label_15;
+    QLabel *testPassed;
     QLabel *label_5;
     QLabel *light1;
     QLabel *label_10;
     QLabel *label_11;
+    QLabel *label_12;
+    QLabel *light6;
     QWidget *slider;
     QLabel *label;
     QPushButton *placeElectrodes;
     QPushButton *doCPR;
     QLabel *label_6;
     QFrame *line;
-    QComboBox *comboBox;
     QPushButton *replaceBatteries;
     QSlider *horizontalSlider;
     QLabel *label_16;
     QLabel *compDepth;
+    QWidget *widget;
+    QRadioButton *radioButton_2;
+    QRadioButton *radioButton;
+    QRadioButton *radioButton_3;
+    QPushButton *pushButton;
     QFrame *line_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -105,12 +111,13 @@ public:
         font.setBold(true);
         font.setWeight(75);
         voicePrompt->setFont(font);
-        label_4 = new QLabel(widget_7);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(10, 0, 111, 41));
+        voicePrompt->setAlignment(Qt::AlignCenter);
+        shockLbl = new QLabel(widget_7);
+        shockLbl->setObjectName(QString::fromUtf8("shockLbl"));
+        shockLbl->setGeometry(QRect(10, 0, 111, 41));
         elapsedTime = new QLabel(widget_7);
         elapsedTime->setObjectName(QString::fromUtf8("elapsedTime"));
-        elapsedTime->setGeometry(QRect(210, 0, 51, 31));
+        elapsedTime->setGeometry(QRect(210, 4, 51, 31));
         compression = new QProgressBar(widget_7);
         compression->setObjectName(QString::fromUtf8("compression"));
         compression->setGeometry(QRect(230, 40, 31, 101));
@@ -174,7 +181,7 @@ public:
         label_9->setScaledContents(true);
         light2 = new QLabel(aedWidget);
         light2->setObjectName(QString::fromUtf8("light2"));
-        light2->setGeometry(QRect(430, 140, 16, 16));
+        light2->setGeometry(QRect(429, 138, 16, 16));
         light2->setStyleSheet(QString::fromUtf8("background-color:grey;border-radius:8px;\n"
 ""));
         light4 = new QLabel(aedWidget);
@@ -195,7 +202,7 @@ public:
         powerBtn->setObjectName(QString::fromUtf8("powerBtn"));
         powerBtn->setGeometry(QRect(60, 0, 81, 81));
         powerBtn->setCursor(QCursor(Qt::PointingHandCursor));
-        powerBtn->setStyleSheet(QString::fromUtf8("background-color:#737569;border-radius:20px"));
+        powerBtn->setStyleSheet(QString::fromUtf8("background-color:red;border-radius:20px"));
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/resources/photos/power-on-black.png"), QSize(), QIcon::Normal, QIcon::Off);
         powerBtn->setIcon(icon1);
@@ -209,11 +216,11 @@ public:
         testFailed->setGeometry(QRect(70, 20, 51, 41));
         testFailed->setPixmap(QPixmap(QString::fromUtf8(":/resources/photos/test-failed.png")));
         testFailed->setScaledContents(true);
-        label_15 = new QLabel(widget_5);
-        label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setGeometry(QRect(10, 10, 51, 51));
-        label_15->setPixmap(QPixmap(QString::fromUtf8(":/resources/photos/test-passed.png")));
-        label_15->setScaledContents(true);
+        testPassed = new QLabel(widget_5);
+        testPassed->setObjectName(QString::fromUtf8("testPassed"));
+        testPassed->setGeometry(QRect(10, 10, 51, 51));
+        testPassed->setPixmap(QPixmap(QString::fromUtf8(":/resources/photos/test-passed.png")));
+        testPassed->setScaledContents(true);
         label_5 = new QLabel(aedWidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setGeometry(QRect(30, 150, 131, 101));
@@ -222,7 +229,7 @@ public:
         light1 = new QLabel(aedWidget);
         light1->setObjectName(QString::fromUtf8("light1"));
         light1->setGeometry(QRect(140, 230, 16, 16));
-        light1->setStyleSheet(QString::fromUtf8("background-color:orange;border-radius:8px;\n"
+        light1->setStyleSheet(QString::fromUtf8("background-color:grey;border-radius:8px;\n"
 ""));
         label_10 = new QLabel(aedWidget);
         label_10->setObjectName(QString::fromUtf8("label_10"));
@@ -235,6 +242,17 @@ public:
         label_11->setGeometry(QRect(40, 250, 91, 81));
         label_11->setPixmap(QPixmap(QString::fromUtf8(":/resources/photos/up-arrow.png")));
         label_11->setScaledContents(true);
+        label_12 = new QLabel(aedWidget);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+        label_12->setGeometry(QRect(50, 710, 121, 101));
+        label_12->setLayoutDirection(Qt::LeftToRight);
+        label_12->setPixmap(QPixmap(QString::fromUtf8(":/resources/photos/CPR-icon.png")));
+        label_12->setScaledContents(true);
+        light6 = new QLabel(aedWidget);
+        light6->setObjectName(QString::fromUtf8("light6"));
+        light6->setGeometry(QRect(58, 718, 16, 16));
+        light6->setStyleSheet(QString::fromUtf8("background-color:grey;border-radius:8px;\n"
+""));
         label_7->raise();
         widget_2->raise();
         label_3->raise();
@@ -250,6 +268,8 @@ public:
         light1->raise();
         label_10->raise();
         label_11->raise();
+        label_12->raise();
+        light6->raise();
         slider = new QWidget(centralwidget);
         slider->setObjectName(QString::fromUtf8("slider"));
         slider->setGeometry(QRect(860, 0, 581, 1181));
@@ -262,6 +282,7 @@ public:
         font2.setPointSize(14);
         label->setFont(font2);
         label->setFrameShape(QFrame::StyledPanel);
+        label->setAlignment(Qt::AlignCenter);
         placeElectrodes = new QPushButton(slider);
         placeElectrodes->setObjectName(QString::fromUtf8("placeElectrodes"));
         placeElectrodes->setGeometry(QRect(40, 120, 181, 71));
@@ -283,14 +304,12 @@ public:
         label_6->setGeometry(QRect(160, 420, 231, 41));
         label_6->setFont(font2);
         label_6->setFrameShape(QFrame::StyledPanel);
+        label_6->setAlignment(Qt::AlignCenter);
         line = new QFrame(slider);
         line->setObjectName(QString::fromUtf8("line"));
         line->setGeometry(QRect(20, 380, 451, 20));
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
-        comboBox = new QComboBox(slider);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
-        comboBox->setGeometry(QRect(170, 540, 86, 25));
         replaceBatteries = new QPushButton(slider);
         replaceBatteries->setObjectName(QString::fromUtf8("replaceBatteries"));
         replaceBatteries->setGeometry(QRect(40, 230, 181, 81));
@@ -321,6 +340,21 @@ public:
         compDepth = new QLabel(slider);
         compDepth->setObjectName(QString::fromUtf8("compDepth"));
         compDepth->setGeometry(QRect(450, 280, 51, 21));
+        widget = new QWidget(slider);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(160, 510, 211, 251));
+        radioButton_2 = new QRadioButton(widget);
+        radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
+        radioButton_2->setGeometry(QRect(10, 40, 161, 23));
+        radioButton = new QRadioButton(widget);
+        radioButton->setObjectName(QString::fromUtf8("radioButton"));
+        radioButton->setGeometry(QRect(10, 10, 151, 23));
+        radioButton_3 = new QRadioButton(widget);
+        radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
+        radioButton_3->setGeometry(QRect(10, 70, 181, 23));
+        pushButton = new QPushButton(widget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(110, 220, 83, 25));
         line_2 = new QFrame(centralwidget);
         line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setGeometry(QRect(220, 1020, 16, 71));
@@ -347,8 +381,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        voicePrompt->setText(QCoreApplication::translate("MainWindow", "CHECK RESPONSIVENESS", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "SHOCKS: ", nullptr));
+        voicePrompt->setText(QString());
+        shockLbl->setText(QCoreApplication::translate("MainWindow", "SHOCKS: ", nullptr));
         elapsedTime->setText(QString());
         shockCount->setText(QCoreApplication::translate("MainWindow", "00", nullptr));
         shockButton->setText(QString());
@@ -362,11 +396,13 @@ public:
         light3->setText(QString());
         powerBtn->setText(QString());
         testFailed->setText(QString());
-        label_15->setText(QString());
+        testPassed->setText(QString());
         label_5->setText(QString());
         light1->setText(QString());
         label_10->setText(QString());
         label_11->setText(QString());
+        label_12->setText(QString());
+        light6->setText(QString());
         label->setText(QCoreApplication::translate("MainWindow", "USER ACTIONS", nullptr));
         placeElectrodes->setText(QCoreApplication::translate("MainWindow", "Place Electrodes", nullptr));
         doCPR->setText(QCoreApplication::translate("MainWindow", "Start CPR", nullptr));
@@ -374,6 +410,10 @@ public:
         replaceBatteries->setText(QCoreApplication::translate("MainWindow", "Replace batteries", nullptr));
         label_16->setText(QCoreApplication::translate("MainWindow", "Compression Depth", nullptr));
         compDepth->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        radioButton_2->setText(QCoreApplication::translate("MainWindow", "Adult with high BPM", nullptr));
+        radioButton->setText(QCoreApplication::translate("MainWindow", "Adult with low BPM", nullptr));
+        radioButton_3->setText(QCoreApplication::translate("MainWindow", "Child with irregular BPM", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
     } // retranslateUi
 
 };

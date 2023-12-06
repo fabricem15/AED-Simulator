@@ -60,7 +60,10 @@ SOURCES       = ../comp3004_project/aed.cpp \
 		../comp3004_project/patient.cpp \
 		../comp3004_project/voiceprompts.cpp qrc_resource.cpp \
 		moc_aed.cpp \
-		moc_mainwindow.cpp
+		moc_battery.cpp \
+		moc_electrode.cpp \
+		moc_mainwindow.cpp \
+		moc_patient.cpp
 OBJECTS       = aed.o \
 		battery.o \
 		electrode.o \
@@ -70,7 +73,10 @@ OBJECTS       = aed.o \
 		voiceprompts.o \
 		qrc_resource.o \
 		moc_aed.o \
-		moc_mainwindow.o
+		moc_battery.o \
+		moc_electrode.o \
+		moc_mainwindow.o \
+		moc_patient.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -383,6 +389,7 @@ qrc_resource.cpp: ../comp3004_project/resource.qrc \
 		../comp3004_project/photos/don't\ touch.png \
 		../comp3004_project/photos/ok.png \
 		../comp3004_project/photos/power-on-black.png \
+		../comp3004_project/photos/CPR-icon.png \
 		../comp3004_project/photos/pads.png \
 		../comp3004_project/photos/power-on-red.png \
 		../comp3004_project/photos/CPR.png \
@@ -401,19 +408,36 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_aed.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_aed.cpp moc_battery.cpp moc_electrode.cpp moc_mainwindow.cpp moc_patient.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_aed.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_aed.cpp moc_battery.cpp moc_electrode.cpp moc_mainwindow.cpp moc_patient.cpp
 moc_aed.cpp: ../comp3004_project/aed.h \
+		../comp3004_project/battery.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/aed.h -o moc_aed.cpp
 
+moc_battery.cpp: ../comp3004_project/battery.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/battery.h -o moc_battery.cpp
+
+moc_electrode.cpp: ../comp3004_project/electrode.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/electrode.h -o moc_electrode.cpp
+
 moc_mainwindow.cpp: ../comp3004_project/mainwindow.h \
 		../comp3004_project/aed.h \
+		../comp3004_project/battery.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/mainwindow.h -o moc_mainwindow.cpp
+
+moc_patient.cpp: ../comp3004_project/patient.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/patient.h -o moc_patient.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -436,32 +460,28 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-aed.o: ../comp3004_project/aed.cpp ../comp3004_project/aed.h
+aed.o: ../comp3004_project/aed.cpp ../comp3004_project/aed.h \
+		../comp3004_project/battery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o aed.o ../comp3004_project/aed.cpp
 
-battery.o: ../comp3004_project/battery.cpp ../comp3004_project/Battery.h \
-		../comp3004_project/Patient.h \
-		../comp3004_project/Electrode.h \
-		../comp3004_project/patient.h \
-		../comp3004_project/voiceprompts.h \
-		../comp3004_project/VoicePrompts.h
+battery.o: ../comp3004_project/battery.cpp ../comp3004_project/battery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o battery.o ../comp3004_project/battery.cpp
 
-electrode.o: ../comp3004_project/electrode.cpp ../comp3004_project/electrode.h \
-		../comp3004_project/patient.h \
-		../comp3004_project/voiceprompts.h
+electrode.o: ../comp3004_project/electrode.cpp ../comp3004_project/electrode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o electrode.o ../comp3004_project/electrode.cpp
 
 main.o: ../comp3004_project/main.cpp ../comp3004_project/mainwindow.h \
-		../comp3004_project/aed.h
+		../comp3004_project/aed.h \
+		../comp3004_project/battery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../comp3004_project/main.cpp
 
 mainwindow.o: ../comp3004_project/mainwindow.cpp ../comp3004_project/mainwindow.h \
 		../comp3004_project/aed.h \
+		../comp3004_project/battery.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../comp3004_project/mainwindow.cpp
 
-patient.o: ../comp3004_project/patient.cpp ../comp3004_project/Patient.h
+patient.o: ../comp3004_project/patient.cpp ../comp3004_project/patient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o patient.o ../comp3004_project/patient.cpp
 
 voiceprompts.o: ../comp3004_project/voiceprompts.cpp ../comp3004_project/voiceprompts.h
@@ -473,8 +493,17 @@ qrc_resource.o: qrc_resource.cpp
 moc_aed.o: moc_aed.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_aed.o moc_aed.cpp
 
+moc_battery.o: moc_battery.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_battery.o moc_battery.cpp
+
+moc_electrode.o: moc_electrode.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_electrode.o moc_electrode.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_patient.o: moc_patient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_patient.o moc_patient.cpp
 
 ####### Install
 

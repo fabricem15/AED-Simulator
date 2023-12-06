@@ -12,8 +12,11 @@ Electrodes::Electrodes()
 //how much pressure you are pushing down
 //cpr compression: 2 inches
 void Electrodes::cprDisplacement(){
-    checkPads();
-    attachPads();
+
+    //checkPads();
+    //attachPads();
+
+
     //user pushes 2 inches
     compressions += 2;
 }
@@ -26,30 +29,36 @@ void Electrodes::checkPlacement(){
             expirationDate = 20251130;
         }
 //check patient type
-        if(patientType == "adult"){
-            adultPads();
-        }
-        else if(patientType == "child")
-        {
-            childPads();
-        }
+
+//        if(patientType == "adult"){
+//          //  adultPads();
+//        }
+//        else if(patientType == "child")
+//        {
+//            childPads();
+//        }
 }
 //detects heart rhythm, its irregular if it beats more than 150 bpm for adults and 200 for kids
 //if aed is off for > 5 secs, then shock count resets
 bool Electrodes::heartAnalysis(){
     //dontTouch() voice prompt
-    dontTouch();
+
+    //dontTouch();
+
+
     if(patientType == "child"){
          if(heartrate > 200){
             qInfo("[CHILD] Irregular heartrate, initiate SHOCK");
             //illuminate
             //shockAdvisedVoice();
-            shockAdvised();
+
+            //shockAdvised();
             return true;
          }
          else {
             qInfo("[CHILD]");
-            noShock();
+
+            //noShock();
             return false;
          }
     }
@@ -57,19 +66,26 @@ bool Electrodes::heartAnalysis(){
 
         if(heartrate > 150){
             qInfo("[ADULT]");
-            shockAdvised();
+
+            //shockAdvised();
+
             //shock will deliver? or in aed
             //illuminate
             return true;
         }
         else {
             qInfo("[ADULT]");
-            noShock();
+
+            //noShock();
+
             return false;
         }
 
     }
-    noShockDelivered();
+
+    //noShockDelivered();
+
     return false;
+
 }
 

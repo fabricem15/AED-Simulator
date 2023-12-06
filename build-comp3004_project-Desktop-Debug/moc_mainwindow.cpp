@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[12];
-    char stringdata0[127];
+    QByteArrayData data[15];
+    char stringdata0[169];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,20 +36,24 @@ QT_MOC_LITERAL(0, 0, 10), // "MainWindow"
 QT_MOC_LITERAL(1, 11, 10), // "updateTime"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 16), // "updateShockCount"
-QT_MOC_LITERAL(4, 40, 14), // "changePowerBtn"
-QT_MOC_LITERAL(5, 55, 14), // "setVoicePrompt"
-QT_MOC_LITERAL(6, 70, 6), // "string"
-QT_MOC_LITERAL(7, 77, 4), // "text"
-QT_MOC_LITERAL(8, 82, 10), // "setBattery"
-QT_MOC_LITERAL(9, 93, 6), // "charge"
-QT_MOC_LITERAL(10, 100, 20), // "turnOffPreviousLight"
-QT_MOC_LITERAL(11, 121, 5) // "index"
+QT_MOC_LITERAL(4, 40, 10), // "shockCount"
+QT_MOC_LITERAL(5, 51, 14), // "setVoicePrompt"
+QT_MOC_LITERAL(6, 66, 6), // "string"
+QT_MOC_LITERAL(7, 73, 4), // "text"
+QT_MOC_LITERAL(8, 78, 10), // "setBattery"
+QT_MOC_LITERAL(9, 89, 6), // "charge"
+QT_MOC_LITERAL(10, 96, 20), // "turnOffPreviousLight"
+QT_MOC_LITERAL(11, 117, 5), // "index"
+QT_MOC_LITERAL(12, 123, 19), // "showStatusIndicator"
+QT_MOC_LITERAL(13, 143, 10), // "passedTest"
+QT_MOC_LITERAL(14, 154, 14) // "switchPowerBtn"
 
     },
     "MainWindow\0updateTime\0\0updateShockCount\0"
-    "changePowerBtn\0setVoicePrompt\0string\0"
-    "text\0setBattery\0charge\0turnOffPreviousLight\0"
-    "index"
+    "shockCount\0setVoicePrompt\0string\0text\0"
+    "setBattery\0charge\0turnOffPreviousLight\0"
+    "index\0showStatusIndicator\0passedTest\0"
+    "switchPowerBtn"
 };
 #undef QT_MOC_LITERAL
 
@@ -59,7 +63,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -67,20 +71,22 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x0a /* Public */,
-       3,    0,   45,    2, 0x0a /* Public */,
-       4,    0,   46,    2, 0x0a /* Public */,
-       5,    1,   47,    2, 0x0a /* Public */,
-       8,    1,   50,    2, 0x0a /* Public */,
-      10,    1,   53,    2, 0x0a /* Public */,
+       1,    0,   49,    2, 0x0a /* Public */,
+       3,    1,   50,    2, 0x0a /* Public */,
+       5,    1,   53,    2, 0x0a /* Public */,
+       8,    1,   56,    2, 0x0a /* Public */,
+      10,    1,   59,    2, 0x0a /* Public */,
+      12,    1,   62,    2, 0x0a /* Public */,
+      14,    0,   65,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    4,
     QMetaType::Void, 0x80000000 | 6,    7,
     QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void, QMetaType::Int,   11,
+    QMetaType::Void, QMetaType::Bool,   13,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -92,11 +98,12 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->updateTime(); break;
-        case 1: _t->updateShockCount(); break;
-        case 2: _t->changePowerBtn(); break;
-        case 3: _t->setVoicePrompt((*reinterpret_cast< string(*)>(_a[1]))); break;
-        case 4: _t->setBattery((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 5: _t->turnOffPreviousLight((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 1: _t->updateShockCount((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->setVoicePrompt((*reinterpret_cast< string(*)>(_a[1]))); break;
+        case 3: _t->setBattery((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->turnOffPreviousLight((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: _t->showStatusIndicator((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 6: _t->switchPowerBtn(); break;
         default: ;
         }
     }
@@ -131,13 +138,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

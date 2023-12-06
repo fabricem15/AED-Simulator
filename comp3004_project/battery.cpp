@@ -1,16 +1,16 @@
-#include "Battery.h"
+#include "battery.h"
 
 Battery::Battery(){
     charge = 100;
-    
 }
 
+
 void Battery::decreaseBattery(){
-    if (electrode.heartAnalysis() && p.isChild()){
-        charge -= 5;
-    } else if (electrode.heartAnalysis() && p.isAdult()){
-        charge -= 10;
-    }
+//    if (electrode.heartAnalysis() && p.isChild()){
+//        charge -= 5;
+//    } else if (electrode.heartAnalysis() && p.isAdult()){
+//        charge -= 10;
+//    }
     
     if (charge <= 0){
         charge = 0;
@@ -19,7 +19,7 @@ void Battery::decreaseBattery(){
 
 bool Battery::replaceBattery(){
     if (charge < 20){
-        vp.resetBattery();
+        //vp.resetBattery();
         return true;
     }
     return false;
@@ -36,6 +36,6 @@ int Battery::getCharge(){
     return charge;
 }
 
-/*void Battery::selfTest(){
-    
-}*/
+bool Battery::selfTest(){
+    return charge > 10;// ** review this
+}
