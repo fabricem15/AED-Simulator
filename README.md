@@ -21,4 +21,4 @@
 - Scenario
 - Mainwindow
 
-## 
+## Repository organization
