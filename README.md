@@ -2,7 +2,7 @@
 
 ## Team members
 - Yasmin Hersi
-  - State diagram
+  -- State diagram
   - Program logic
   - Traceability matrix
 - Fatima Ferdous
