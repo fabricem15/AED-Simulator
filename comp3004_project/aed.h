@@ -5,6 +5,7 @@
 #include <QTimer>
 #include "battery.h"
 #include "electrode.h"
+#include "patient.h"
 
 using namespace std;
 
@@ -25,31 +26,36 @@ public:
     void checkResponsiveness();
     void callHelp();
     void attachPads();
-    void analyzeRhythm();
+
     void sendElectricShock();
+    void doCPR();
+    void readyToShock();
 
-
+    void setElectrodes(Electrodes* e);
+    void setBattery(Battery* b);
+    void setPatient(Patient* p);
     Battery* getBattery();
     Electrodes* getElectrodes();
+    Patient* getPatient();
 
 signals:
-    void voicePrompt(string text); // only the AED should send the voice prompt, it may read from battery or electrode but they may not communicate directly with the display
+    void voicePrompt(string text);
     void lightNumberChanged(int lightNumber); // signal to the mainwindow to stop flashing previous light indicator
     void selfTestPassed(bool passed);
     void shockCountIncreased(int shockCount);
+    void cprDelivered();
 
 public slots:
-    void electrodesON();
+    void analyzeRhythm();
 
 private:
-    int compressionDepth;
     int shockCount;
     bool isOn;
     int lightNumber;
     QTimer* timer;
     Battery* battery;
     Electrodes* electrodes;
-//    int energyLevels[];
+    Patient* patient;
 
 };
 

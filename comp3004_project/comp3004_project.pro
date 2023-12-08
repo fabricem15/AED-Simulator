@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     patient.cpp \
+    scenario.cpp \
     voiceprompts.cpp
 
 HEADERS += \
@@ -23,6 +24,7 @@ HEADERS += \
     electrode.h \
     mainwindow.h \
     patient.h \
+    scenario.h \
     voiceprompts.h
 
 FORMS += \

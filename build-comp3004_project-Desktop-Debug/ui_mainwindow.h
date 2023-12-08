@@ -38,6 +38,7 @@ public:
     QLabel *elapsedTime;
     QProgressBar *compression;
     QLabel *shockCount;
+    QLabel *graph;
     QPushButton *shockButton;
     QLabel *light5;
     QLabel *label_3;
@@ -66,7 +67,7 @@ public:
     QLabel *label_6;
     QFrame *line;
     QPushButton *replaceBatteries;
-    QSlider *horizontalSlider;
+    QSlider *cprSlider;
     QLabel *label_16;
     QLabel *compDepth;
     QWidget *widget;
@@ -100,11 +101,11 @@ public:
 ""));
         widget_7 = new QWidget(widget_3);
         widget_7->setObjectName(QString::fromUtf8("widget_7"));
-        widget_7->setGeometry(QRect(100, 60, 271, 191));
+        widget_7->setGeometry(QRect(90, 60, 311, 201));
         widget_7->setStyleSheet(QString::fromUtf8("background-color:rgb(246, 245, 244)"));
         voicePrompt = new QLabel(widget_7);
         voicePrompt->setObjectName(QString::fromUtf8("voicePrompt"));
-        voicePrompt->setGeometry(QRect(30, 140, 211, 41));
+        voicePrompt->setGeometry(QRect(50, 140, 211, 41));
         QFont font;
         font.setFamily(QString::fromUtf8("Quicksand"));
         font.setPointSize(13);
@@ -112,15 +113,16 @@ public:
         font.setWeight(75);
         voicePrompt->setFont(font);
         voicePrompt->setAlignment(Qt::AlignCenter);
+        voicePrompt->setWordWrap(true);
         shockLbl = new QLabel(widget_7);
         shockLbl->setObjectName(QString::fromUtf8("shockLbl"));
         shockLbl->setGeometry(QRect(10, 0, 111, 41));
         elapsedTime = new QLabel(widget_7);
         elapsedTime->setObjectName(QString::fromUtf8("elapsedTime"));
-        elapsedTime->setGeometry(QRect(210, 4, 51, 31));
+        elapsedTime->setGeometry(QRect(250, 10, 51, 31));
         compression = new QProgressBar(widget_7);
         compression->setObjectName(QString::fromUtf8("compression"));
-        compression->setGeometry(QRect(230, 40, 31, 101));
+        compression->setGeometry(QRect(260, 40, 31, 101));
         compression->setMaximum(3);
         compression->setValue(0);
         compression->setTextVisible(false);
@@ -130,9 +132,16 @@ public:
         shockCount = new QLabel(widget_7);
         shockCount->setObjectName(QString::fromUtf8("shockCount"));
         shockCount->setGeometry(QRect(70, 12, 21, 17));
+        graph = new QLabel(widget_7);
+        graph->setObjectName(QString::fromUtf8("graph"));
+        graph->setGeometry(QRect(30, 50, 221, 91));
+        graph->setFrameShape(QFrame::Panel);
+        graph->setLineWidth(0);
+        graph->setScaledContents(true);
         shockButton = new QPushButton(widget_3);
         shockButton->setObjectName(QString::fromUtf8("shockButton"));
         shockButton->setGeometry(QRect(180, 270, 121, 111));
+        shockButton->setCursor(QCursor(Qt::PointingHandCursor));
         shockButton->setStyleSheet(QString::fromUtf8("background-color:#b0abab;border-radius:55px;"));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/resources/photos/Heart_icon.svg.png"), QSize(), QIcon::Normal, QIcon::Off);
@@ -320,20 +329,20 @@ public:
         icon4.addFile(QString::fromUtf8(":/resources/photos/replace-battery.jpg"), QSize(), QIcon::Normal, QIcon::Off);
         replaceBatteries->setIcon(icon4);
         replaceBatteries->setIconSize(QSize(60, 60));
-        horizontalSlider = new QSlider(slider);
-        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
-        horizontalSlider->setGeometry(QRect(260, 280, 160, 16));
+        cprSlider = new QSlider(slider);
+        cprSlider->setObjectName(QString::fromUtf8("cprSlider"));
+        cprSlider->setGeometry(QRect(260, 280, 160, 16));
         QFont font4;
         font4.setPointSize(12);
-        horizontalSlider->setFont(font4);
-        horizontalSlider->setLayoutDirection(Qt::LeftToRight);
-        horizontalSlider->setMaximum(3);
-        horizontalSlider->setSingleStep(1);
-        horizontalSlider->setValue(0);
-        horizontalSlider->setSliderPosition(0);
-        horizontalSlider->setOrientation(Qt::Horizontal);
-        horizontalSlider->setInvertedControls(false);
-        horizontalSlider->setTickPosition(QSlider::TicksBothSides);
+        cprSlider->setFont(font4);
+        cprSlider->setLayoutDirection(Qt::LeftToRight);
+        cprSlider->setMaximum(3);
+        cprSlider->setSingleStep(1);
+        cprSlider->setValue(0);
+        cprSlider->setSliderPosition(0);
+        cprSlider->setOrientation(Qt::Horizontal);
+        cprSlider->setInvertedControls(false);
+        cprSlider->setTickPosition(QSlider::TicksBothSides);
         label_16 = new QLabel(slider);
         label_16->setObjectName(QString::fromUtf8("label_16"));
         label_16->setGeometry(QRect(280, 230, 131, 21));
@@ -372,8 +381,8 @@ public:
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
-        QObject::connect(horizontalSlider, SIGNAL(valueChanged(int)), compDepth, SLOT(setNum(int)));
-        QObject::connect(horizontalSlider, SIGNAL(valueChanged(int)), compression, SLOT(setValue(int)));
+        QObject::connect(cprSlider, SIGNAL(valueChanged(int)), compDepth, SLOT(setNum(int)));
+        QObject::connect(cprSlider, SIGNAL(valueChanged(int)), compression, SLOT(setValue(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -385,6 +394,7 @@ public:
         shockLbl->setText(QCoreApplication::translate("MainWindow", "SHOCKS: ", nullptr));
         elapsedTime->setText(QString());
         shockCount->setText(QCoreApplication::translate("MainWindow", "00", nullptr));
+        graph->setText(QString());
         shockButton->setText(QString());
         light5->setText(QString());
         label_3->setText(QCoreApplication::translate("MainWindow", "AED ZOLL PLUS", nullptr));

@@ -9,16 +9,30 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
+    // init all objects I think is the best way to track them or
+
+    battery = new Battery();
+    electrodes = new Electrodes();
+    patient = new Patient();
+
     aed = new AED();
+    aed->setBattery(battery);
+    aed->setElectrodes(electrodes);
+    aed->setPatient(patient);
+
 
 
     // elapsed time timer
     timer = new QTimer(this);
+
+
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTime);
 
 
-//    ui->progressBar->setValue(batteryHealth);
-//    connect(this, &MainWindow::setBattery, ui->progressBar, &QProgressBar::setValue);// connect the battery update from the aed's battery object to the above slot for the progress bar
+    connect(battery, &Battery::batteryDecreased, this, &MainWindow::setBattery);
+
+
+
 
     connect(ui->powerBtn, &QPushButton::clicked, aed, &AED::switchPower);
     connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::switchPowerBtn);
@@ -26,18 +40,35 @@ MainWindow::MainWindow(QWidget *parent)
     connect(aed, &AED::lightNumberChanged, this, &MainWindow::turnOffPreviousLight);
 
 
+    connect(electrodes, &Electrodes::attachPads, aed, &AED::analyzeRhythm);
+
+    connect(aed, &AED::cprDelivered, patient, &Patient::handleCPR);
+
     connect(ui->placeElectrodes, &QPushButton::clicked, aed->getElectrodes(), &Electrodes::attachPads);
 
 
-     ui->testPassed->hide();
-     ui->testFailed->hide();
-     ui->shockCount->hide();
-     ui->shockLbl->hide();
+    connect(ui->shockButton, &QPushButton::clicked, aed, &AED::sendElectricShock);
 
-     connect(aed, &AED::selfTestPassed, this, &MainWindow::showStatusIndicator);
+    connect(patient, &Patient::newRhythm, this, &MainWindow::setGraph);
+    
+//    connect(electrodes, &Electrodes::shockPatient, patient, &Patient::handleShock);
+
+    //connect(ui->cpr, &QPushButton::clicked, this, &MainWindow::startCPR);
+
+    //connect(ui->shockButton, &QPushButton::clicked, aed, &AED::sendElectricShock);
+    
+
+    connect(ui->cprSlider, &QSlider::valueChanged, this, &MainWindow::checkCompressionDepth);
+
+    ui->testPassed->hide();
+    ui->testFailed->hide();
+    ui->shockCount->hide();
+    ui->shockLbl->hide();
+
+    connect(aed, &AED::selfTestPassed, this, &MainWindow::showStatusIndicator);
 
 
-    for (int i = 0; i < 5; i++){ // set up indicator lights
+    for (int i = 0; i < 6; i++){ // set up indicator lights
         char s[8];
         sprintf(s, "light%d", i+1);
         QLabel* lbl= ui->aedWidget->findChild<QLabel*>(s);
@@ -48,13 +79,41 @@ MainWindow::MainWindow(QWidget *parent)
     // shock count update
     connect(aed, &AED::shockCountIncreased, this, &MainWindow::updateShockCount);
 
-//    ui->testFailed->hide();
 
+
+    connect(ui->doCPR, &QPushButton::pressed, [&, this](){
+       this->ui->cprSlider->setValue(3);
+    });
+//    ui->testFailed->hide();
 
 
 }
 
 
+
+void MainWindow::checkCompressionDepth(int depth){
+
+//    if (cprStage == false)
+//        return;
+
+    if (depth < 2){
+        setVoicePrompt("PUSH HARDER");
+    }
+    else {
+     setVoicePrompt("CONTINUE CPR");
+    }
+}
+
+
+
+void MainWindow::setGraph(string url){
+
+    QPixmap pixmap(QString::fromStdString(url));
+
+    cout << url << " pixmap url" << endl;
+
+    ui->graph->setPixmap(pixmap);
+}
 
 void MainWindow::setBattery(int charge){
     ui->battery->setValue(charge);
@@ -82,9 +141,13 @@ void MainWindow::updateTime(){
 
 void MainWindow::updateShockCount(int shockCount){
 
-    char s[3];
+    char s[4];
+    cout << shockCount << endl;
     sprintf(s, "%02d", shockCount);
-    ui->shockCount->setText(s); // change this to the actual shockCount
+
+    cout << s << endl;
+    cout << "did not get here" << endl;
+    ui->shockCount->setText(s);
 }
 
 void MainWindow::turnOffPreviousLight(int index){

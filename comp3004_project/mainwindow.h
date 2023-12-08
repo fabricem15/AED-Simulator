@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <stdio.h>
 #include "aed.h"
+#include "patient.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,10 +29,15 @@ public slots:
     void turnOffPreviousLight(int index);
     void showStatusIndicator(bool passedTest);
     void switchPowerBtn();
+    void checkCompressionDepth(int depth);
+    void setGraph(string url);
 
 private:
     Ui::MainWindow *ui;
     AED* aed;
+    Battery* battery;
+    Electrodes* electrodes;
+    Patient* patient;
     QTimer* timer;
     int timeElapsed;
     QVector<QLabel*> indicatorLabels;

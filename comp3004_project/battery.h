@@ -15,21 +15,19 @@ class Battery: public QObject{
 
     public:
         Battery();
-        void decreaseBattery();
+        void decreaseBattery(int amount);
         int getCharge();
         bool replaceBattery();
         void resetBattery();
         bool selfTest();
     signals:
 
+        void batteryDecreased(int charge);
     public slots:
 
     private:
         int charge;
-     //   Electrodes electrode;
-    //    Patient p;
-      //  VoicePrompts vp;
-    
+
 };
 
 #endif // BATTERY_H

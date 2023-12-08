@@ -54,10 +54,10 @@
       <widget class="QWidget" name="widget_7" native="true">
        <property name="geometry">
         <rect>
-         <x>100</x>
+         <x>90</x>
          <y>60</y>
-         <width>271</width>
-         <height>191</height>
+         <width>311</width>
+         <height>201</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -66,7 +66,7 @@
        <widget class="QLabel" name="voicePrompt">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>50</x>
           <y>140</y>
           <width>211</width>
           <height>41</height>
@@ -86,6 +86,9 @@
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
        </widget>
        <widget class="QLabel" name="shockLbl">
         <property name="geometry">
@@ -103,8 +106,8 @@
        <widget class="QLabel" name="elapsedTime">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>4</y>
+          <x>250</x>
+          <y>10</y>
           <width>51</width>
           <height>31</height>
          </rect>
@@ -116,7 +119,7 @@
        <widget class="QProgressBar" name="compression">
         <property name="geometry">
          <rect>
-          <x>230</x>
+          <x>260</x>
           <y>40</y>
           <width>31</width>
           <height>101</height>
@@ -154,6 +157,28 @@
          <string>00</string>
         </property>
        </widget>
+       <widget class="QLabel" name="graph">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>50</y>
+          <width>221</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
       <widget class="QPushButton" name="shockButton">
        <property name="geometry">
@@ -163,6 +188,9 @@
          <width>121</width>
          <height>111</height>
         </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color:#b0abab;border-radius:55px;</string>
@@ -748,7 +776,7 @@
       </size>
      </property>
     </widget>
-    <widget class="QSlider" name="horizontalSlider">
+    <widget class="QSlider" name="cprSlider">
      <property name="geometry">
       <rect>
        <x>260</x>
@@ -916,7 +944,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>horizontalSlider</sender>
+   <sender>cprSlider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>compDepth</receiver>
    <slot>setNum(int)</slot>
@@ -932,7 +960,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>horizontalSlider</sender>
+   <sender>cprSlider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>compression</receiver>
    <slot>setValue(int)</slot>

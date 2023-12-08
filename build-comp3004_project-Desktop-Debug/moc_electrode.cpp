@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Electrodes_t {
     QByteArrayData data[5];
-    char stringdata0[50];
+    char stringdata0[47];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,11 +35,11 @@ static const qt_meta_stringdata_Electrodes_t qt_meta_stringdata_Electrodes = {
 QT_MOC_LITERAL(0, 0, 10), // "Electrodes"
 QT_MOC_LITERAL(1, 11, 10), // "attachPads"
 QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 13), // "electrodesOFF"
-QT_MOC_LITERAL(4, 37, 12) // "shockPatient"
+QT_MOC_LITERAL(3, 23, 10), // "removePads"
+QT_MOC_LITERAL(4, 34, 12) // "shockPatient"
 
     },
-    "Electrodes\0attachPads\0\0electrodesOFF\0"
+    "Electrodes\0attachPads\0\0removePads\0"
     "shockPatient"
 };
 #undef QT_MOC_LITERAL
@@ -77,7 +77,7 @@ void Electrodes::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->attachPads(); break;
-        case 1: _t->electrodesOFF(); break;
+        case 1: _t->removePads(); break;
         case 2: _t->shockPatient(); break;
         default: ;
         }
@@ -92,7 +92,7 @@ void Electrodes::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         }
         {
             using _t = void (Electrodes::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Electrodes::electrodesOFF)) {
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Electrodes::removePads)) {
                 *result = 1;
                 return;
             }
@@ -155,7 +155,7 @@ void Electrodes::attachPads()
 }
 
 // SIGNAL 1
-void Electrodes::electrodesOFF()
+void Electrodes::removePads()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }

@@ -8,13 +8,21 @@ Electrodes::Electrodes()
 {
     compressions = 0;
     heartrate = 180; //adult scenario
+    patientType = "adult";
 }
-//how much pressure you are pushing down
-//cpr compression: 2 inches
+
+Electrodes::Electrodes(string patientType)
+{
+    compressions = 0;
+    this->patientType = patientType;
+    heartrate = 180; //adult scenario
+}
+
+
+
 void Electrodes::cprDisplacement(){
 
-    //checkPads();
-    //attachPads();
+
 
 
     //user pushes 2 inches
@@ -28,16 +36,17 @@ void Electrodes::checkPlacement(){
             //new pad's expiry date
             expirationDate = 20251130;
         }
-//check patient type
 
-//        if(patientType == "adult"){
-//          //  adultPads();
-//        }
-//        else if(patientType == "child")
-//        {
-//            childPads();
-//        }
 }
+
+void Electrodes::setPatientType(string type){
+    patientType = type;
+}
+string Electrodes::getPatientType(){
+    return patientType;
+}
+
+
 //detects heart rhythm, its irregular if it beats more than 150 bpm for adults and 200 for kids
 //if aed is off for > 5 secs, then shock count resets
 bool Electrodes::heartAnalysis(){

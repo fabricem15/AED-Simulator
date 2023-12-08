@@ -5,16 +5,18 @@ Battery::Battery(){
 }
 
 
-void Battery::decreaseBattery(){
+void Battery::decreaseBattery(int amount){
 //    if (electrode.heartAnalysis() && p.isChild()){
 //        charge -= 5;
 //    } else if (electrode.heartAnalysis() && p.isAdult()){
 //        charge -= 10;
 //    }
+    charge -= amount;
     
     if (charge <= 0){
         charge = 0;
     }
+   emit batteryDecreased(charge);
 }
 
 bool Battery::replaceBattery(){
@@ -38,9 +40,5 @@ int Battery::getCharge(){
 
 //if the batteries have enough charge inside initially
 bool Battery::selfTest(){
-    if (charge < 50){
-        return false;
-    }
-
-    return true;
+    return charge >= 50;
 }
