@@ -18,7 +18,6 @@
 - Electrodes
 - Battery
 - Patient
-- Scenario
 - Mainwindow
 
 ## Repository organization
