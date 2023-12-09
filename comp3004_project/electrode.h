@@ -1,7 +1,5 @@
 #ifndef ELECTRODES_H
 #define ELECTRODES_H
-//#include "patient.h"
-//#include "voiceprompts.h"
 #include "string.h"
 #include <QObject>
 #include <iostream>

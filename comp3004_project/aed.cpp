@@ -4,11 +4,14 @@ AED::AED()
 {
     isOn = false;
     lightNumber =0;
-//    battery = new Battery();
-//    electrodes = new Electrodes();
-
     shockCount = 0;
 
+}
+
+AED::AED(Battery* battery, Electrodes* el, Patient* p){
+    this->battery = battery;
+    electrodes = el;
+    patient = p;
 }
 
 
@@ -42,12 +45,9 @@ void AED::analyzeRhythm(){
         lightNumber = 3;
 
 
-
     emit voicePrompt("DON'T TOUCH PATIENT, ANALYZING");
 
-    // call a function to display the graph and show the proper voice prompt
-
-
+    emit analyzing();
     // process rhythm and decide if appropriate to shock, regardless go to do cpr
 
     if (patient->isShockableHeartRate())
@@ -56,9 +56,7 @@ void AED::analyzeRhythm(){
         cout << "shockable rhythm: " << patient->getRhythm() << endl;
         //check if the electrode pads are attached
         // emit signal to electrode to deliver shock to the victim,
-        // the patient class should then receive the shock and improve the condition by a factor of the energy level
-        // decrease battery here
-        //battery->decreaseBattery();
+
 
         QTimer::singleShot(2000, [this](){
 
@@ -81,7 +79,6 @@ void AED::analyzeRhythm(){
         //QTimer::singleShot(4000, this, &AED::doCPR);
     }
 
-
 }
 
 
@@ -90,17 +87,17 @@ void AED::doCPR(){
     lightNumber=5;
 
     emit voicePrompt("START CPR");
-
-    patient->handleCPR();
-   // cout << "patient rhythm: " << patient->getRhythm() << endl;
-
-
-    QTimer::singleShot(3000, this, &AED::analyzeRhythm);
-
+//    QTimer::singleShot(3000, this, &AED::analyzeRhythm);
 
 }
 
+void AED::cprStarted(){
 
+    emit voicePrompt("GOOD COMPRESSIONS");
+    patient->handleCPR();
+
+    QTimer::singleShot(3000, this, &AED::analyzeRhythm);
+}
 
 
 void AED::readyToShock(){
@@ -113,16 +110,12 @@ void AED::readyToShock(){
 void AED::sendElectricShock(){
 
     // emit a signal to the electrodes
-
      electrodes->shockPatient();
 
-    // improve patient condition
-
+     // improve patient condition
      patient->handleShock();
 
-
     // decrease battery
-
     if (electrodes->getPatientType() == "adult"){
         battery->decreaseBattery(10);
     }
@@ -134,29 +127,20 @@ void AED::sendElectricShock(){
     shockCount++;
     shockCountIncreased(shockCount);
 
-
-    cout << "got here!!" << endl;
-
-
+    emit this->voicePrompt("SHOCK DELIVERED");
     QTimer::singleShot(1000, [this](){
-            emit this->voicePrompt("SHOCK DELIVERED");
-            QTimer::singleShot(3000, this, &AED::doCPR);
-
+            QTimer::singleShot(2000, this, &AED::doCPR);
     });
 }
 
 
-
 bool AED::selfTest(){
-
-    // check the batteries
 
     if (battery->selfTest()){
 
         emit voicePrompt("UNIT OK");
         emit selfTestPassed(true);
          QTimer::singleShot(2000, this, &AED::checkResponsiveness);
-//       checkResponsiveness();
     }
     else {
         emit selfTestPassed(false);
@@ -169,13 +153,11 @@ bool AED::selfTest(){
 void AED::switchPower(){
     isOn = !isOn;
     if (isOn){
-        // we can use a single shot timer to delay execution and allow time to show indicator light flashing and changing of steps and
         QTimer::singleShot(1000, this, &AED::selfTest);
 
     }
     else { // reset variables on power off
         shockCount = 0;
-
     }
 
 }
@@ -206,9 +188,7 @@ int AED::getActiveLightIndex(){
 int AED::getShockCount(){
     return shockCount;
 }
-bool AED::isShockableRhythm(int rhythm){
-    return rhythm < 70 || rhythm > 150; // change this later
-}
+
 
 bool AED::isTurnedOn(){
     return isOn;

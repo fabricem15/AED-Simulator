@@ -15,11 +15,11 @@ class AED: public QObject{
 
 public:
     AED();
+    AED(Battery* b, Electrodes* e, Patient* p);
     bool selfTest();
     int getShockCount();
     int getActiveButton();
     int getActiveLightIndex();
-    bool isShockableRhythm(int rhythm);
     bool isTurnedOn();
     void checkCompressionDepth();
     void switchPower();
@@ -40,13 +40,15 @@ public:
 
 signals:
     void voicePrompt(string text);
-    void lightNumberChanged(int lightNumber); // signal to the mainwindow to stop flashing previous light indicator
+    void lightNumberChanged(int lightNumber);
     void selfTestPassed(bool passed);
     void shockCountIncreased(int shockCount);
     void cprDelivered();
+    void analyzing();
 
 public slots:
     void analyzeRhythm();
+    void cprStarted();
 
 private:
     int shockCount;

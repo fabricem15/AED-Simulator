@@ -13,6 +13,7 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -70,11 +71,14 @@ public:
     QSlider *cprSlider;
     QLabel *label_16;
     QLabel *compDepth;
-    QWidget *widget;
-    QRadioButton *radioButton_2;
-    QRadioButton *radioButton;
-    QRadioButton *radioButton_3;
-    QPushButton *pushButton;
+    QGroupBox *groupBox;
+    QRadioButton *radioButton_4;
+    QRadioButton *radioButton_5;
+    QRadioButton *radioButton_6;
+    QRadioButton *radioButton_7;
+    QRadioButton *radioButton_8;
+    QPushButton *run;
+    QPushButton *reset;
     QFrame *line_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -349,21 +353,30 @@ public:
         compDepth = new QLabel(slider);
         compDepth->setObjectName(QString::fromUtf8("compDepth"));
         compDepth->setGeometry(QRect(450, 280, 51, 21));
-        widget = new QWidget(slider);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(160, 510, 211, 251));
-        radioButton_2 = new QRadioButton(widget);
-        radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
-        radioButton_2->setGeometry(QRect(10, 40, 161, 23));
-        radioButton = new QRadioButton(widget);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setGeometry(QRect(10, 10, 151, 23));
-        radioButton_3 = new QRadioButton(widget);
-        radioButton_3->setObjectName(QString::fromUtf8("radioButton_3"));
-        radioButton_3->setGeometry(QRect(10, 70, 181, 23));
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(110, 220, 83, 25));
+        groupBox = new QGroupBox(slider);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(170, 510, 201, 281));
+        radioButton_4 = new QRadioButton(groupBox);
+        radioButton_4->setObjectName(QString::fromUtf8("radioButton_4"));
+        radioButton_4->setGeometry(QRect(10, 20, 151, 23));
+        radioButton_5 = new QRadioButton(groupBox);
+        radioButton_5->setObjectName(QString::fromUtf8("radioButton_5"));
+        radioButton_5->setGeometry(QRect(10, 60, 161, 23));
+        radioButton_6 = new QRadioButton(groupBox);
+        radioButton_6->setObjectName(QString::fromUtf8("radioButton_6"));
+        radioButton_6->setGeometry(QRect(10, 110, 181, 23));
+        radioButton_7 = new QRadioButton(groupBox);
+        radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
+        radioButton_7->setGeometry(QRect(10, 160, 181, 23));
+        radioButton_8 = new QRadioButton(groupBox);
+        radioButton_8->setObjectName(QString::fromUtf8("radioButton_8"));
+        radioButton_8->setGeometry(QRect(10, 210, 181, 23));
+        run = new QPushButton(slider);
+        run->setObjectName(QString::fromUtf8("run"));
+        run->setGeometry(QRect(280, 820, 111, 31));
+        reset = new QPushButton(slider);
+        reset->setObjectName(QString::fromUtf8("reset"));
+        reset->setGeometry(QRect(170, 820, 81, 31));
         line_2 = new QFrame(centralwidget);
         line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setGeometry(QRect(220, 1020, 16, 71));
@@ -420,10 +433,14 @@ public:
         replaceBatteries->setText(QCoreApplication::translate("MainWindow", "Replace batteries", nullptr));
         label_16->setText(QCoreApplication::translate("MainWindow", "Compression Depth", nullptr));
         compDepth->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        radioButton_2->setText(QCoreApplication::translate("MainWindow", "Adult with high BPM", nullptr));
-        radioButton->setText(QCoreApplication::translate("MainWindow", "Adult with low BPM", nullptr));
-        radioButton_3->setText(QCoreApplication::translate("MainWindow", "Child with irregular BPM", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
+        groupBox->setTitle(QString());
+        radioButton_4->setText(QCoreApplication::translate("MainWindow", "Adult with VF", nullptr));
+        radioButton_5->setText(QCoreApplication::translate("MainWindow", "Child with VT", nullptr));
+        radioButton_6->setText(QCoreApplication::translate("MainWindow", "Asystole", nullptr));
+        radioButton_7->setText(QCoreApplication::translate("MainWindow", "Battery depletion", nullptr));
+        radioButton_8->setText(QCoreApplication::translate("MainWindow", "Electrodes detached", nullptr));
+        run->setText(QCoreApplication::translate("MainWindow", "Run scenario", nullptr));
+        reset->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
     } // retranslateUi
 
 };

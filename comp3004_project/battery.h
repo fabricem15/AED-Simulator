@@ -4,9 +4,6 @@
 #include <QObject>
 #include <iostream>
 
-//#include "Electrode.h"
-//#include "VoicePrompts.h"
-#include "QtDebug"
 
 using namespace std;
 
@@ -21,7 +18,6 @@ class Battery: public QObject{
         void resetBattery();
         bool selfTest();
     signals:
-
         void batteryDecreased(int charge);
     public slots:
 

@@ -20,14 +20,10 @@ public:
     void irregularRhythm();
     void regularRhythm();
 
-    // perhaps a function for each scenario?
-
-
-
 private:
     AED* aed;
-    Patient* p;
-    Battery* b;
+    Patient* patient;
+    Battery* battery;
 
 };
 

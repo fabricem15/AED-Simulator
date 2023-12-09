@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <stdio.h>
+#include <QButtonGroup>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
 
-    // init all objects I think is the best way to track them or
+    selectedScenario = -1;
 
     battery = new Battery();
     electrodes = new Electrodes();
@@ -21,21 +22,26 @@ MainWindow::MainWindow(QWidget *parent)
     aed->setPatient(patient);
 
 
-
-    // elapsed time timer
     timer = new QTimer(this);
 
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTime);
 
-
     connect(battery, &Battery::batteryDecreased, this, &MainWindow::setBattery);
 
 
+    connect(ui->powerBtn, &QPushButton::clicked, [this](){
 
+        if (selectedScenario >= 0){
+            this->aed->switchPower();
+            this->switchPowerBtn();
+        }
+        else {
+            cout << "Please select a scenario before turning the AED on." << endl;
+        }
 
-    connect(ui->powerBtn, &QPushButton::clicked, aed, &AED::switchPower);
-    connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::switchPowerBtn);
+    });
+//    connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::switchPowerBtn);
     connect(aed, &AED::voicePrompt, this, &MainWindow::setVoicePrompt);
     connect(aed, &AED::lightNumberChanged, this, &MainWindow::turnOffPreviousLight);
 
@@ -45,20 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(aed, &AED::cprDelivered, patient, &Patient::handleCPR);
 
     connect(ui->placeElectrodes, &QPushButton::clicked, aed->getElectrodes(), &Electrodes::attachPads);
-
-
     connect(ui->shockButton, &QPushButton::clicked, aed, &AED::sendElectricShock);
-
     connect(patient, &Patient::newRhythm, this, &MainWindow::setGraph);
     
-//    connect(electrodes, &Electrodes::shockPatient, patient, &Patient::handleShock);
-
-    //connect(ui->cpr, &QPushButton::clicked, this, &MainWindow::startCPR);
-
-    //connect(ui->shockButton, &QPushButton::clicked, aed, &AED::sendElectricShock);
-    
-
-    connect(ui->cprSlider, &QSlider::valueChanged, this, &MainWindow::checkCompressionDepth);
 
     ui->testPassed->hide();
     ui->testFailed->hide();
@@ -84,34 +79,76 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->doCPR, &QPushButton::pressed, [&, this](){
        this->ui->cprSlider->setValue(3);
     });
-//    ui->testFailed->hide();
+
+
+
+    QButtonGroup* radioButtons = new QButtonGroup();
+
+    cout <<  ui->groupBox->children().size();
+    for (int i = 0; i < ui->groupBox->children().size(); i++){
+        radioButtons->addButton( qobject_cast<QRadioButton*>(ui->groupBox->children().at(i)), i);
+    }
+
+
+    connect(radioButtons, &QButtonGroup::idClicked, [this] (int id){
+        this->selectedScenario = id;
+    });
+\
+    // run scenario button
+    connect(ui->run, &QPushButton::clicked, [this] (){
+
+        this->runScenario(selectedScenario, patient);
+
+    });
+
+    // reset button
+    connect(ui->reset, &QPushButton::clicked, [this] (){
+
+    });
+
+
+    connect(ui->doCPR, &QPushButton::clicked, aed, &AED::cprStarted);
+
+    connect(aed, &AED::analyzing, [this](){
+       this->ui->cprSlider->setValue(0);
+    });
 
 
 }
 
+void MainWindow::runScenario(int scenario, Patient* p){
 
 
-void MainWindow::checkCompressionDepth(int depth){
+    cout << scenario  << " scenario " <<endl;
+    if (scenario == 0){
 
-//    if (cprStage == false)
-//        return;
+        patient->setAge(55);
+        patient->setWeight(75);
 
-    if (depth < 2){
-        setVoicePrompt("PUSH HARDER");
+        patient->setBpm(30);
+
+
+    }
+    else if (scenario == 1){
+
+    }
+    else if(scenario == 2){
+
+    }
+    else if (scenario==3){
+
     }
     else {
-     setVoicePrompt("CONTINUE CPR");
+
     }
+
 }
+
 
 
 
 void MainWindow::setGraph(string url){
-
     QPixmap pixmap(QString::fromStdString(url));
-
-    cout << url << " pixmap url" << endl;
-
     ui->graph->setPixmap(pixmap);
 }
 

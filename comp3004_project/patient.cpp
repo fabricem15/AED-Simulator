@@ -31,6 +31,18 @@ int Patient::getRhythm(){
     return bpm;
 }
 
+void Patient::setAge(int age){
+    this->age = age;
+}
+void Patient::setWeight(int weight){
+    this->weight = weight;
+}
+
+void Patient::setBpm(int bpm)
+{
+    this->bpm = bpm;
+}
+
 bool Patient::isShockableHeartRate(){
     if (bpm == 0){
         return false;

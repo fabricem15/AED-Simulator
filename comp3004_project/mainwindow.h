@@ -29,8 +29,8 @@ public slots:
     void turnOffPreviousLight(int index);
     void showStatusIndicator(bool passedTest);
     void switchPowerBtn();
-    void checkCompressionDepth(int depth);
     void setGraph(string url);
+    void runScenario(int scenarioNum, Patient* p);
 
 private:
     Ui::MainWindow *ui;
@@ -40,6 +40,7 @@ private:
     Patient* patient;
     QTimer* timer;
     int timeElapsed;
+    int selectedScenario;
     QVector<QLabel*> indicatorLabels;
 
 };

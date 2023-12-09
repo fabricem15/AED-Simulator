@@ -16,6 +16,9 @@ class Patient: public QObject{
         bool isShockableHeartRate();
         int getRhythm();
         void setGraph(int rhytm);
+        void setAge(int age);
+        void setWeight(int weight);
+        void setBpm(int bpm);
 
     signals:
         void newRhythm(string r);

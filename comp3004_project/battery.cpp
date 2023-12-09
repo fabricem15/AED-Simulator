@@ -6,11 +6,6 @@ Battery::Battery(){
 
 
 void Battery::decreaseBattery(int amount){
-//    if (electrode.heartAnalysis() && p.isChild()){
-//        charge -= 5;
-//    } else if (electrode.heartAnalysis() && p.isAdult()){
-//        charge -= 10;
-//    }
     charge -= amount;
     
     if (charge <= 0){
@@ -21,7 +16,7 @@ void Battery::decreaseBattery(int amount){
 
 bool Battery::replaceBattery(){
     if (charge < 20){
-        //vp.resetBattery();
+
         return true;
     }
     return false;
@@ -38,7 +33,7 @@ int Battery::getCharge(){
     return charge;
 }
 
-//if the batteries have enough charge inside initially
+
 bool Battery::selfTest(){
     return charge >= 50;
 }
