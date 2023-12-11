@@ -19,25 +19,6 @@ Electrodes::Electrodes(string patientType)
 }
 
 
-//void Electrodes::cprDisplacement(){
-
-
-//    //user pushes 2 inches
-//    compressions += 2;
-//}
-
-
-//check if electrodes are placed correctly
-void Electrodes::checkPlacement(){
-//check if pads are expired
-        if(today > expirationDate){
-            qInfo("Pads expired, replace them");
-            //new pad's expiry date
-            expirationDate = 20251130;
-        }
-
-}
-
 void Electrodes::setPatientType(string type){
     patientType = type;
 }
@@ -46,7 +27,7 @@ string Electrodes::getPatientType(){
 }
 
 
-bool Electrodes::heartAnalysis(){
-    return true;
-}
+//bool Electrodes::heartAnalysis(){
+//    return true;
+//}
 

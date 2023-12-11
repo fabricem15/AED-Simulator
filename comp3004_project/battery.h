@@ -1,6 +1,5 @@
 #ifndef BATTERY_H
 #define BATTERY_H
-//#include pPatient.h"
 #include <QObject>
 #include <iostream>
 
@@ -14,12 +13,12 @@ class Battery: public QObject{
         Battery();
         void decreaseBattery(int amount);
         int getCharge();
-        bool replaceBattery();
-        void resetBattery();
+        void replaceBattery();
+//        void resetBattery();
         bool selfTest();
     signals:
         void batteryDecreased(int charge);
-    public slots:
+        void lowBattery();
 
     private:
         int charge;

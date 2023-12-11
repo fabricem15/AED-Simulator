@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1435</width>
-    <height>1194</height>
+    <height>1088</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -841,7 +841,7 @@
       <string>0</string>
      </property>
     </widget>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="scenarioGroupBox">
      <property name="geometry">
       <rect>
        <x>170</x>
@@ -943,6 +943,19 @@
      </property>
      <property name="text">
       <string>RESET</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="scenarioLbl">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>480</y>
+       <width>491</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Scenario: </string>
      </property>
     </widget>
    </widget>

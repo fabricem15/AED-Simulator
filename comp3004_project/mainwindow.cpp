@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
     selectedScenario = -1;
 
     battery = new Battery();
@@ -26,9 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTime);
-
     connect(battery, &Battery::batteryDecreased, this, &MainWindow::setBattery);
-
 
     connect(ui->powerBtn, &QPushButton::clicked, [this](){
 
@@ -37,11 +34,12 @@ MainWindow::MainWindow(QWidget *parent)
             this->switchPowerBtn();
         }
         else {
-            cout << "Please select a scenario before turning the AED on." << endl;
+            ui->scenarioLbl->setText("Please select a scenario before turning the AED on.");
+            ui->scenarioLbl->setStyleSheet("color:red");
+//            cout << "Please select a scenario before turning the AED on." << endl;
         }
 
     });
-//    connect(ui->powerBtn, &QPushButton::clicked, this, &MainWindow::switchPowerBtn);
     connect(aed, &AED::voicePrompt, this, &MainWindow::setVoicePrompt);
     connect(aed, &AED::lightNumberChanged, this, &MainWindow::turnOffPreviousLight);
 
@@ -50,10 +48,27 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(aed, &AED::cprDelivered, patient, &Patient::handleCPR);
 
-    connect(ui->placeElectrodes, &QPushButton::clicked, aed->getElectrodes(), &Electrodes::attachPads);
-    connect(ui->shockButton, &QPushButton::clicked, aed, &AED::sendElectricShock);
+
+
+    // place electrodes connect
+    connect(ui->placeElectrodes, &QPushButton::clicked, [this](){
+       if (aed->getActiveLightIndex() == 2){// ensure that pads can only be attached once and during the appropriate stage
+           electrodes->attachPads();
+       }
+
+    });
+
+
+    connect(ui->shockButton, &QPushButton::clicked, [this](){
+       if (aed->getActiveLightIndex() == 4){ // only handle click if the AED is ready to shock
+           aed->sendElectricShock();
+       }
+
+    });
+
+
     connect(patient, &Patient::newRhythm, this, &MainWindow::setGraph);
-    
+
 
     ui->testPassed->hide();
     ui->testFailed->hide();
@@ -75,43 +90,62 @@ MainWindow::MainWindow(QWidget *parent)
     connect(aed, &AED::shockCountIncreased, this, &MainWindow::updateShockCount);
 
 
+    // start cpr button click
+//    connect(ui->doCPR, &QPushButton::pressed, [&, this](){
+//       this->ui->cprSlider->setValue(3);
+//    });
 
-    connect(ui->doCPR, &QPushButton::pressed, [&, this](){
-       this->ui->cprSlider->setValue(3);
+
+    connect(ui->doCPR, &QPushButton::clicked, [this] (){
+        if (aed->getActiveLightIndex() == 5){
+            this->ui->cprSlider->setValue(3);
+            aed->cprStarted();
+        }
+
     });
 
+
+    connect(ui->cprSlider, &QSlider::valueChanged, [this] (int value){
+         if (aed->getActiveLightIndex() == 5 && value < 2){
+             setVoicePrompt("PUSH HARDER");
+         }
+         else if (aed->getActiveLightIndex() == 5 && value >= 2){
+             setVoicePrompt("GOOD COMPRESSIONS");
+         }
+
+    });
+    //connect(ui->doCPR, &QPushButton::clicked, aed, &AED::cprStarted);
+
+    connect(aed, &AED::analyzing, [this](){
+       this->ui->cprSlider->setValue(0);
+    });
 
 
     QButtonGroup* radioButtons = new QButtonGroup();
 
-    cout <<  ui->groupBox->children().size();
-    for (int i = 0; i < ui->groupBox->children().size(); i++){
-        radioButtons->addButton( qobject_cast<QRadioButton*>(ui->groupBox->children().at(i)), i);
+    cout <<  ui->scenarioGroupBox->children().size();
+    for (int i = 0; i < ui->scenarioGroupBox->children().size(); i++){
+        radioButtons->addButton( qobject_cast<QRadioButton*>(ui->scenarioGroupBox->children().at(i)), i);
     }
 
 
     connect(radioButtons, &QButtonGroup::idClicked, [this] (int id){
         this->selectedScenario = id;
+//        cout << radioButtons[id].objectName() << endl;
     });
 \
     // run scenario button
     connect(ui->run, &QPushButton::clicked, [this] (){
 
         this->runScenario(selectedScenario, patient);
-
+//        ui->scenarioGroupBox->hide();
     });
 
     // reset button
     connect(ui->reset, &QPushButton::clicked, [this] (){
-
+        ui->scenarioGroupBox->show();
     });
 
-
-    connect(ui->doCPR, &QPushButton::clicked, aed, &AED::cprStarted);
-
-    connect(aed, &AED::analyzing, [this](){
-       this->ui->cprSlider->setValue(0);
-    });
 
 
 }
@@ -136,7 +170,8 @@ void MainWindow::runScenario(int scenario, Patient* p){
 
     }
     else if (scenario==3){
-
+        // set battery decrease amount to 50
+        aed-
     }
     else {
 
@@ -160,6 +195,9 @@ void MainWindow::setVoicePrompt(string text){
     ui->voicePrompt->setText(QString::fromStdString(text));
 }
 
+/*
+    updates the AED timer and flashes the indicator light for the active icon
+*/
 void MainWindow::updateTime(){
     timeElapsed++;
     int minutes = timeElapsed / 60;
@@ -169,21 +207,19 @@ void MainWindow::updateTime(){
     sprintf(s, "%02d: %02d", minutes, seconds);
     ui->elapsedTime->setText(s);
 
-    if (timeElapsed %2 == 0)
-        indicatorLabels[aed->getActiveLightIndex()]->setStyleSheet("background-color:grey;border-radius:8px;");
-    else
-        indicatorLabels[aed->getActiveLightIndex()]->setStyleSheet("background-color:orange;border-radius:8px;");
+    if (aed->getActiveLightIndex() > -1){
+        if (timeElapsed %2 == 0)
+            indicatorLabels[aed->getActiveLightIndex()]->setStyleSheet("background-color:grey;border-radius:8px;");
+        else
+            indicatorLabels[aed->getActiveLightIndex()]->setStyleSheet("background-color:orange;border-radius:8px;");
+    }
+
 
 }
 
 void MainWindow::updateShockCount(int shockCount){
-
     char s[4];
-    cout << shockCount << endl;
     sprintf(s, "%02d", shockCount);
-
-    cout << s << endl;
-    cout << "did not get here" << endl;
     ui->shockCount->setText(s);
 }
 

@@ -14,9 +14,7 @@ class Electrodes: public QObject
 public:
     Electrodes();
     Electrodes(string patientType);
-    void cprDisplacement();
-    void checkPlacement();
-    bool heartAnalysis();
+//    bool heartAnalysis();
     string getPatientType();
     void setPatientType(string type);
 

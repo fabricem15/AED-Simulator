@@ -52,6 +52,7 @@ public slots:
 
 private:
     int shockCount;
+    int batteryDecreaseAmount;
     bool isOn;
     int lightNumber;
     QTimer* timer;

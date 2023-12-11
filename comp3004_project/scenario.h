@@ -16,9 +16,6 @@ class Scenario: public QObject
 public:
     Scenario(AED* aed, Patient* p, Battery* b);
     Scenario();
-    void initScenario(int scenarioNumber);
-    void irregularRhythm();
-    void regularRhythm();
 
 private:
     AED* aed;

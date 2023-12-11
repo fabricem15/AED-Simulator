@@ -4,8 +4,6 @@ Scenario::Scenario()
 {
 
 
-
-
 }
 
 Scenario::Scenario(AED* aed, Patient* p, Battery* b){
@@ -14,8 +12,3 @@ Scenario::Scenario(AED* aed, Patient* p, Battery* b){
     battery = b;
 }
 
-void Scenario::initScenario(int scenarioNumber){
-
-
-
-}

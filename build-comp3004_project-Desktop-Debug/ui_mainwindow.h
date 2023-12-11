@@ -71,7 +71,7 @@ public:
     QSlider *cprSlider;
     QLabel *label_16;
     QLabel *compDepth;
-    QGroupBox *groupBox;
+    QGroupBox *scenarioGroupBox;
     QRadioButton *radioButton_4;
     QRadioButton *radioButton_5;
     QRadioButton *radioButton_6;
@@ -79,6 +79,7 @@ public:
     QRadioButton *radioButton_8;
     QPushButton *run;
     QPushButton *reset;
+    QLabel *scenarioLbl;
     QFrame *line_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -87,7 +88,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1435, 1194);
+        MainWindow->resize(1435, 1088);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         aedWidget = new QWidget(centralwidget);
@@ -353,22 +354,22 @@ public:
         compDepth = new QLabel(slider);
         compDepth->setObjectName(QString::fromUtf8("compDepth"));
         compDepth->setGeometry(QRect(450, 280, 51, 21));
-        groupBox = new QGroupBox(slider);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(170, 510, 201, 281));
-        radioButton_4 = new QRadioButton(groupBox);
+        scenarioGroupBox = new QGroupBox(slider);
+        scenarioGroupBox->setObjectName(QString::fromUtf8("scenarioGroupBox"));
+        scenarioGroupBox->setGeometry(QRect(170, 510, 201, 281));
+        radioButton_4 = new QRadioButton(scenarioGroupBox);
         radioButton_4->setObjectName(QString::fromUtf8("radioButton_4"));
         radioButton_4->setGeometry(QRect(10, 20, 151, 23));
-        radioButton_5 = new QRadioButton(groupBox);
+        radioButton_5 = new QRadioButton(scenarioGroupBox);
         radioButton_5->setObjectName(QString::fromUtf8("radioButton_5"));
         radioButton_5->setGeometry(QRect(10, 60, 161, 23));
-        radioButton_6 = new QRadioButton(groupBox);
+        radioButton_6 = new QRadioButton(scenarioGroupBox);
         radioButton_6->setObjectName(QString::fromUtf8("radioButton_6"));
         radioButton_6->setGeometry(QRect(10, 110, 181, 23));
-        radioButton_7 = new QRadioButton(groupBox);
+        radioButton_7 = new QRadioButton(scenarioGroupBox);
         radioButton_7->setObjectName(QString::fromUtf8("radioButton_7"));
         radioButton_7->setGeometry(QRect(10, 160, 181, 23));
-        radioButton_8 = new QRadioButton(groupBox);
+        radioButton_8 = new QRadioButton(scenarioGroupBox);
         radioButton_8->setObjectName(QString::fromUtf8("radioButton_8"));
         radioButton_8->setGeometry(QRect(10, 210, 181, 23));
         run = new QPushButton(slider);
@@ -377,6 +378,9 @@ public:
         reset = new QPushButton(slider);
         reset->setObjectName(QString::fromUtf8("reset"));
         reset->setGeometry(QRect(170, 820, 81, 31));
+        scenarioLbl = new QLabel(slider);
+        scenarioLbl->setObjectName(QString::fromUtf8("scenarioLbl"));
+        scenarioLbl->setGeometry(QRect(100, 480, 491, 20));
         line_2 = new QFrame(centralwidget);
         line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setGeometry(QRect(220, 1020, 16, 71));
@@ -433,7 +437,7 @@ public:
         replaceBatteries->setText(QCoreApplication::translate("MainWindow", "Replace batteries", nullptr));
         label_16->setText(QCoreApplication::translate("MainWindow", "Compression Depth", nullptr));
         compDepth->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        groupBox->setTitle(QString());
+        scenarioGroupBox->setTitle(QString());
         radioButton_4->setText(QCoreApplication::translate("MainWindow", "Adult with VF", nullptr));
         radioButton_5->setText(QCoreApplication::translate("MainWindow", "Child with VT", nullptr));
         radioButton_6->setText(QCoreApplication::translate("MainWindow", "Asystole", nullptr));
@@ -441,6 +445,7 @@ public:
         radioButton_8->setText(QCoreApplication::translate("MainWindow", "Electrodes detached", nullptr));
         run->setText(QCoreApplication::translate("MainWindow", "Run scenario", nullptr));
         reset->setText(QCoreApplication::translate("MainWindow", "RESET", nullptr));
+        scenarioLbl->setText(QCoreApplication::translate("MainWindow", "Scenario: ", nullptr));
     } // retranslateUi
 
 };
