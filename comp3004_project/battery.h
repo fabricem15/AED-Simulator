@@ -17,7 +17,7 @@ class Battery: public QObject{
 //        void resetBattery();
         bool selfTest();
     signals:
-        void batteryDecreased(int charge);
+        void batteryChanged(int charge);
         void lowBattery();
 
     private:

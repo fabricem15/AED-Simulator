@@ -6,6 +6,7 @@ AED::AED()
     lightNumber =0;
     shockCount = 0;
     batteryDecreaseAmount = 0;
+    charged = true;
 }
 
 AED::AED(Battery* battery, Electrodes* el, Patient* p){
@@ -113,6 +114,9 @@ void AED::sendElectricShock(){
      // improve patient condition
      patient->handleShock();
 
+     shockCount++;
+     shockCountIncreased(shockCount);
+
     // decrease battery
     if (electrodes->getPatientType() == "adult"){
         battery->decreaseBattery(batteryDecreaseAmount);
@@ -122,12 +126,20 @@ void AED::sendElectricShock(){
     }
 
 
-    shockCount++;
-    shockCountIncreased(shockCount);
+    // check battery
+    if (battery->getCharge() <= 20){
+        handleLowBattery();
+        return;
+    }
+
+
+
+
 
     emit this->voicePrompt("SHOCK DELIVERED");
-    QTimer::singleShot(1000, [this](){
-            QTimer::singleShot(2000, this, &AED::doCPR);
+    QTimer::singleShot(3000, [this](){
+        doCPR();
+//            QTimer::singleShot(2000, this, &AED::doCPR);
     });
 }
 
@@ -139,13 +151,16 @@ bool AED::selfTest(){
         emit voicePrompt("UNIT OK");
         emit selfTestPassed(true);
          QTimer::singleShot(2000, this, &AED::checkResponsiveness);
+         return true;
     }
     else {
         emit selfTestPassed(false);
         emit voicePrompt("UNIT FAILED");
+
+        // prompt to replace batteries
+        return false;
     }
 
-    return true;
 }
 
 void AED::switchPower(){
@@ -161,9 +176,47 @@ void AED::switchPower(){
 }
 
 
+void AED::handleLowBattery(){
+    cout << "battery critically low!!!" << endl;
+    emit voicePrompt("BATTERY CRITICALLY LOW");
+
+    QTimer::singleShot(2000, [this](){
+        emit voicePrompt("REPLACE BATTERIES");
+    });
+
+    emit lightNumberChanged(lightNumber);
+    charged = false;
+    //lightNumber = -1;
+
+}
+
+
+void AED::replaceBattery(){
+    if (charged)
+        return;
 
 
 
+    battery->replaceBattery();
+    charged = true;
+    if (lightNumber == 0){
+        // start sequence
+
+    }
+    else {
+        emit voicePrompt("BATTERIES REPLACED");
+        QTimer::singleShot(2000, this, &AED::doCPR);
+    }
+}
+
+
+bool AED::isCharged(){
+    return charged;
+}
+
+void AED::setBatteryDecreaseAmount(int amount){
+   batteryDecreaseAmount = amount;
+}
 
 void AED::setPatient(Patient *p){
     patient = p;

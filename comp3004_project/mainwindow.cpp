@@ -20,12 +20,16 @@ MainWindow::MainWindow(QWidget *parent)
     aed->setElectrodes(electrodes);
     aed->setPatient(patient);
 
+    aed->setBatteryDecreaseAmount(80);
 
     timer = new QTimer(this);
 
 
     connect(timer, &QTimer::timeout, this, &MainWindow::updateTime);
-    connect(battery, &Battery::batteryDecreased, this, &MainWindow::setBattery);
+    connect(battery, &Battery::batteryChanged, this, &MainWindow::setBattery);
+    connect(battery, &Battery::lowBattery, aed, &AED::handleLowBattery);
+    connect(ui->replaceBatteries, &QPushButton::clicked, aed, &AED::replaceBattery);
+
 
     connect(ui->powerBtn, &QPushButton::clicked, [this](){
 
@@ -47,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(electrodes, &Electrodes::attachPads, aed, &AED::analyzeRhythm);
 
     connect(aed, &AED::cprDelivered, patient, &Patient::handleCPR);
+
+
 
 
 
@@ -171,14 +177,13 @@ void MainWindow::runScenario(int scenario, Patient* p){
     }
     else if (scenario==3){
         // set battery decrease amount to 50
-        aed-
+        //aed-
     }
     else {
 
     }
 
 }
-
 
 
 
@@ -195,6 +200,8 @@ void MainWindow::setVoicePrompt(string text){
     ui->voicePrompt->setText(QString::fromStdString(text));
 }
 
+
+
 /*
     updates the AED timer and flashes the indicator light for the active icon
 */
@@ -207,7 +214,7 @@ void MainWindow::updateTime(){
     sprintf(s, "%02d: %02d", minutes, seconds);
     ui->elapsedTime->setText(s);
 
-    if (aed->getActiveLightIndex() > -1){
+    if (aed->isCharged()){
         if (timeElapsed %2 == 0)
             indicatorLabels[aed->getActiveLightIndex()]->setStyleSheet("background-color:grey;border-radius:8px;");
         else

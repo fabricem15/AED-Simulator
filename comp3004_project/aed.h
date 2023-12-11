@@ -30,10 +30,12 @@ public:
     void sendElectricShock();
     void doCPR();
     void readyToShock();
+    bool isCharged();
 
     void setElectrodes(Electrodes* e);
     void setBattery(Battery* b);
     void setPatient(Patient* p);
+    void setBatteryDecreaseAmount(int amount);
     Battery* getBattery();
     Electrodes* getElectrodes();
     Patient* getPatient();
@@ -49,12 +51,15 @@ signals:
 public slots:
     void analyzeRhythm();
     void cprStarted();
+    void handleLowBattery();
+    void replaceBattery();
 
 private:
     int shockCount;
     int batteryDecreaseAmount;
     bool isOn;
     int lightNumber;
+    bool charged;
     QTimer* timer;
     Battery* battery;
     Electrodes* electrodes;

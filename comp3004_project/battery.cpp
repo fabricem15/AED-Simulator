@@ -13,11 +13,10 @@ void Battery::decreaseBattery(int amount){
     }
 
    if (charge <= 20){
-//       emit lowBattery();
-
+       emit lowBattery();
    }
 
-   emit batteryDecreased(charge);
+   emit batteryChanged(charge);
 }
 
 //bool Battery::replaceBattery(){
@@ -31,11 +30,9 @@ void Battery::decreaseBattery(int amount){
 void Battery::replaceBattery(){
 
     charge = 100;
+    emit batteryChanged(charge);
 
-//    if (this->replaceBattery()){
-//        charge = 100;
-//        qInfo("batteries replaced and charge is at 100%");
-//    }
+
 }
 
 int Battery::getCharge(){
