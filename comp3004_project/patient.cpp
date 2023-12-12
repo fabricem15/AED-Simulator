@@ -5,12 +5,14 @@ Patient::Patient(){
     weight = 60;
     age = 54;
     bpm = 20;
+    willSurvive = true;
 }
 
-Patient::Patient(int age, int weight, int bpm){
+Patient::Patient(int age, int weight, int bpm, bool survive){
     this->age = age;
     this->weight = weight;
     this->bpm = bpm;
+    willSurvive = survive;
 }
 
 bool Patient::isChild(){
@@ -41,22 +43,33 @@ bool Patient::isShockableHeartRate(){
 }
 
 void Patient::handleShock(){
-    if (bpm > 180){
+
+    if (!willSurvive){
+
+        bpm = 0;
+    }
+    else if (bpm > 180){
         bpm -= 10;
     } 
     else {
         bpm += 10;
     }
 
+
+
     setGraph(bpm);
 }
 
 void Patient::handleCPR(){
+
     if (bpm > 180){
         bpm -= 5;
     } 
-    else {
+    else if (bpm > 0 && bpm <= 180){
         bpm += 5;
+    }
+    else {
+        bpm = 0;
     }
 
     setGraph(bpm);
@@ -85,6 +98,13 @@ void Patient::setGraph(int rhythm){
         emit newRhythm(rhythmGraph);
     }
 
+}
+
+void Patient::setSurvive(bool survive){
+    willSurvive = survive;
+}
+bool Patient::getSurvive(){
+    return willSurvive;
 }
 
 int Patient::getRhythm(){

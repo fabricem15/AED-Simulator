@@ -43,6 +43,7 @@ void AED::checkResponsiveness(){
 
     QTimer::singleShot(2000, this, &AED::nextStep);
 }
+
 void AED::callHelp(){
 
     emit lightNumberChanged(lightNumber);
@@ -50,6 +51,7 @@ void AED::callHelp(){
     emit voicePrompt("CALL FOR HELP");
     QTimer::singleShot(2000, this, &AED::nextStep);
 }
+
 void AED::attachPads(){
 
     emit lightNumberChanged(lightNumber);
@@ -57,6 +59,7 @@ void AED::attachPads(){
 
     emit voicePrompt("ATTACH PADS");
 }
+
 void AED::analyzeRhythm(){
     emit lightNumberChanged(lightNumber);
 
@@ -86,7 +89,6 @@ void AED::analyzeRhythm(){
         emit lightNumberChanged(lightNumber);
         lightNumber=5;
 
-        // end the simulation here
 
     }
 }
@@ -160,6 +162,10 @@ bool AED::selfTest(){
     else {
         emit selfTestPassed(false);
         emit voicePrompt("UNIT FAILED");
+        charged = false;
+
+
+        handleLowBattery();
 
         // prompt to replace batteries
         return false;
@@ -204,14 +210,16 @@ void AED::handleLowBattery(){
 
 
 void AED::replaceBattery(){
+
     if (charged)
         return;
 
 
     battery->replaceBattery();
     charged = true;
-    if (lightNumber == 0){
-        // start sequence
+
+    if (lightNumber == 0){ // redo the self test after replacing the battery
+        selfTest();
 
     }
     else {

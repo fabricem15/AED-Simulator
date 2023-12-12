@@ -11,7 +11,7 @@ class Patient: public QObject{
 
     public:
         Patient();
-        Patient(int age, int weight, int bpm);
+        Patient(int age, int weight, int bpm, bool survive);
         bool isChild();
         bool isAdult();
         bool isShockableHeartRate();
@@ -20,6 +20,8 @@ class Patient: public QObject{
         void setAge(int age);
         void setWeight(int weight);
         void setBpm(int bpm);
+        void setSurvive(bool survive);
+        bool getSurvive();
 
     signals:
         void newRhythm(string r);
@@ -32,6 +34,7 @@ class Patient: public QObject{
         int weight;
         int bpm;
         string rhythmGraph;
+        bool willSurvive;
 
 };
 

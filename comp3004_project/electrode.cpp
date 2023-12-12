@@ -15,7 +15,6 @@ Electrodes::Electrodes(string patientType)
     badPlacement = false;
 }
 
-
 void Electrodes::setPatientType(string type){
     patientType = type;
 }
@@ -23,7 +22,7 @@ string Electrodes::getPatientType(){
     return patientType;
 }
 
-void Electrodes::setPlacement(bool placement){
+void Electrodes::setBadPlacement(bool placement){
     badPlacement = placement;
 }
 

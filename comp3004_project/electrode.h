@@ -16,7 +16,7 @@ public:
     Electrodes(string patientType);
     string getPatientType();
     void setPatientType(string type);
-    void setPlacement(bool placement);
+    void setBadPlacement(bool placement);
     bool getPlacement();
 
 signals:

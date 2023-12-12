@@ -14,7 +14,7 @@ class Battery: public QObject{
         void decreaseBattery(int amount);
         int getCharge();
         void replaceBattery();
-//        void resetBattery();
+        void setBattery(int charge);
         bool selfTest();
     signals:
         void batteryChanged(int charge);

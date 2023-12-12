@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
                QTimer::singleShot(1000, [this](){
                    setVoicePrompt("BAD PLACEMENT.\nPLEASE ATTACH ELECTRODES.");
                });
-               electrodes->setPlacement(false);
+               electrodes->setBadPlacement(false);
            }
            else {
                if (patient->isAdult())
@@ -108,13 +108,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     QButtonGroup* radioButtons = new QButtonGroup();
-
     for (int i = 0; i < ui->scenarioGroupBox->children().size(); i++){
         radioButtons->addButton( qobject_cast<QRadioButton*>(ui->scenarioGroupBox->children().at(i)), i);
     }
+
     connect(radioButtons, &QButtonGroup::idClicked, [this, radioButtons] (int id){
         if (!aed->isTurnedOn()){
-            cout << id << " is the id of the clicked button" << endl;
 
             stringstream ss;
             ss << "Scenario: " << radioButtons->button(id)->text().toStdString();
@@ -130,7 +129,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::runScenario(int scenario){
 
-
     if (scenario == 0){ // adult with VF
 
         aed->setBatteryDecreaseAmount(10);
@@ -138,8 +136,7 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(55);
         patient->setWeight(75);
         patient->setBpm(30);
-
-
+        electrodes->setBadPlacement(false);
     }
     else if (scenario == 1){ // child with VT
 
@@ -148,29 +145,48 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(3);
         patient->setWeight(15);
         patient->setBpm(230);
+        electrodes->setBadPlacement(false);
     }
     else if(scenario == 2){ // asystole patient not improving
 
         aed->setBatteryDecreaseAmount(10);
         patient->setAge(40);
         patient->setWeight(75);
-        patient->setBpm(0);
+
+        patient->setBpm(210);
+        patient->setSurvive(false);
+        electrodes->setBadPlacement(false);
+
     }
     else if (scenario==3){ // battery replacement
-        // set battery decrease amount to 50
         aed->setBatteryDecreaseAmount(70);
         patient->setAge(89);
         patient->setWeight(110);
-        patient->setBpm(40);
+        patient->setBpm(20);
+        electrodes->setBadPlacement(false);
 
     }
-    else if (scenario == 4){ //
+    else if (scenario == 4){ // electrode misplaced
 
-       // electrodes->setPlacement(true);
+        battery->setBattery(100);
+
+        aed->setBatteryDecreaseAmount(10);
+        patient->setAge(89);
+        patient->setWeight(130);
+        patient->setBpm(210);
+        electrodes->setBadPlacement(true);
+    }
+    else if (scenario == 5){ // unit failed
+
+        battery->setBattery(15);
+        aed->setBatteryDecreaseAmount(10);
+        patient->setAge(89);
+        patient->setWeight(110);
+        patient->setBpm(20);
+        electrodes->setBadPlacement(false);
     }
 
 }
-
 
 
 void MainWindow::setGraph(string url){
@@ -219,14 +235,13 @@ void MainWindow::turnOffPreviousLight(int index){
 
 void MainWindow::showStatusIndicator(bool passedTest){
 
-
     if (passedTest){
-
-        cout << "called status indicator function" << endl;
         ui->testPassed->show();
+        ui->testFailed->hide();
         timer->start(1000);
         ui->shockCount->show();
         ui->shockLbl->show();
+        ui->elapsedTime->show();
     }
     else {
         ui->testFailed->show();
@@ -236,13 +251,11 @@ void MainWindow::showStatusIndicator(bool passedTest){
 void MainWindow::switchPowerBtn(){
     if (aed->isTurnedOn())
     {
-
          ui->powerBtn->setStyleSheet("background-color:green;border-radius:20px");
-         ui->shockCount->show();
-         ui->shockLbl->show();
-         ui->elapsedTime->show();
          aed->blockSignals(false);
          ui->voicePrompt->show();
+
+         //setBattery(battery->getCharge());// reset it at 0
     }
 
     else {
@@ -266,8 +279,9 @@ void MainWindow::switchPowerBtn(){
 
          ui->voicePrompt->setText("");
          ui->voicePrompt->hide();
-
          timeElapsed = 0;
+         setBattery(0);
+
     }
 }
 

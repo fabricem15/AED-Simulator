@@ -19,20 +19,14 @@ void Battery::decreaseBattery(int amount){
    emit batteryChanged(charge);
 }
 
-//bool Battery::replaceBattery(){
-//    if (charge < 20){
-
-//        return true;
-//    }
-//    return false;
-//}
-
 void Battery::replaceBattery(){
 
     charge = 100;
     emit batteryChanged(charge);
+}
 
-
+void Battery::setBattery(int charge){
+    this->charge = charge;
 }
 
 int Battery::getCharge(){

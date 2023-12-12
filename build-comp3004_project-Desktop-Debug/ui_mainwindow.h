@@ -77,6 +77,7 @@ public:
     QRadioButton *radioButton_6;
     QRadioButton *radioButton_7;
     QRadioButton *radioButton_8;
+    QRadioButton *radioButton_9;
     QLabel *scenarioLbl;
     QFrame *line_2;
     QMenuBar *menubar;
@@ -171,7 +172,7 @@ public:
         battery->setObjectName(QString::fromUtf8("battery"));
         battery->setGeometry(QRect(700, 10, 118, 23));
         battery->setLayoutDirection(Qt::LeftToRight);
-        battery->setValue(100);
+        battery->setValue(0);
         battery->setTextVisible(true);
         battery->setOrientation(Qt::Horizontal);
         battery->setInvertedAppearance(false);
@@ -370,6 +371,9 @@ public:
         radioButton_8 = new QRadioButton(scenarioGroupBox);
         radioButton_8->setObjectName(QString::fromUtf8("radioButton_8"));
         radioButton_8->setGeometry(QRect(10, 210, 181, 23));
+        radioButton_9 = new QRadioButton(scenarioGroupBox);
+        radioButton_9->setObjectName(QString::fromUtf8("radioButton_9"));
+        radioButton_9->setGeometry(QRect(10, 250, 181, 23));
         scenarioLbl = new QLabel(slider);
         scenarioLbl->setObjectName(QString::fromUtf8("scenarioLbl"));
         scenarioLbl->setGeometry(QRect(100, 480, 491, 20));
@@ -435,6 +439,7 @@ public:
         radioButton_6->setText(QCoreApplication::translate("MainWindow", "Asystole", nullptr));
         radioButton_7->setText(QCoreApplication::translate("MainWindow", "Battery depletion", nullptr));
         radioButton_8->setText(QCoreApplication::translate("MainWindow", "Electrodes detached", nullptr));
+        radioButton_9->setText(QCoreApplication::translate("MainWindow", "Self-test failed", nullptr));
         scenarioLbl->setText(QString());
     } // retranslateUi
 
