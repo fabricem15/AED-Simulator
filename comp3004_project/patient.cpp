@@ -67,7 +67,7 @@ void Patient::setGraph(int rhythm){
     string url = "";
 
     if (rhythm == 0){
-        url = ":/resources/photos/asystole.webp";
+        url = ":/resources/photos/asystole.png";
     }
     else if (rhythm > 0 && rhythm < 60){
         url = ":/resources/photos/vf.png";
@@ -76,11 +76,9 @@ void Patient::setGraph(int rhythm){
         url = ":/resources/photos/PEA.jpg";
     }
     else {
-        url = ":/resources/photos/vt.webp";
+
+        url = ":/resources/photos/vt.png";
     }
-
-    //url = ":/resources/photos/ok.png";
-
 
     if (url != rhythmGraph){
         rhythmGraph = url;

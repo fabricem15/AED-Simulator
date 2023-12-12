@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[21];
-    char stringdata0[217];
+    QByteArrayData data[19];
+    char stringdata0[206];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,9 +50,7 @@ QT_MOC_LITERAL(14, 154, 14), // "switchPowerBtn"
 QT_MOC_LITERAL(15, 169, 8), // "setGraph"
 QT_MOC_LITERAL(16, 178, 3), // "url"
 QT_MOC_LITERAL(17, 182, 11), // "runScenario"
-QT_MOC_LITERAL(18, 194, 11), // "scenarioNum"
-QT_MOC_LITERAL(19, 206, 8), // "Patient*"
-QT_MOC_LITERAL(20, 215, 1) // "p"
+QT_MOC_LITERAL(18, 194, 11) // "scenarioNum"
 
     },
     "MainWindow\0updateTime\0\0updateShockCount\0"
@@ -60,7 +58,7 @@ QT_MOC_LITERAL(20, 215, 1) // "p"
     "setBattery\0charge\0turnOffPreviousLight\0"
     "index\0showStatusIndicator\0passedTest\0"
     "switchPowerBtn\0setGraph\0url\0runScenario\0"
-    "scenarioNum\0Patient*\0p"
+    "scenarioNum"
 };
 #undef QT_MOC_LITERAL
 
@@ -86,7 +84,7 @@ static const uint qt_meta_data_MainWindow[] = {
       12,    1,   72,    2, 0x0a /* Public */,
       14,    0,   75,    2, 0x0a /* Public */,
       15,    1,   76,    2, 0x0a /* Public */,
-      17,    2,   79,    2, 0x0a /* Public */,
+      17,    1,   79,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -97,7 +95,7 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void, QMetaType::Bool,   13,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 6,   16,
-    QMetaType::Void, QMetaType::Int, 0x80000000 | 19,   18,   20,
+    QMetaType::Void, QMetaType::Int,   18,
 
        0        // eod
 };
@@ -116,19 +114,8 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->showStatusIndicator((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 6: _t->switchPowerBtn(); break;
         case 7: _t->setGraph((*reinterpret_cast< string(*)>(_a[1]))); break;
-        case 8: _t->runScenario((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< Patient*(*)>(_a[2]))); break;
+        case 8: _t->runScenario((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 8:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 1:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< Patient* >(); break;
-            }
-            break;
         }
     }
 }
@@ -167,7 +154,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 9)
-            qt_static_metacall(this, _c, _id, _a);
+            *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 9;
     }
     return _id;

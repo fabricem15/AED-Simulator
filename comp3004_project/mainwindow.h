@@ -30,7 +30,7 @@ public slots:
     void showStatusIndicator(bool passedTest);
     void switchPowerBtn();
     void setGraph(string url);
-    void runScenario(int scenarioNum, Patient* p);
+    void runScenario(int scenarioNum);
 
 private:
     Ui::MainWindow *ui;

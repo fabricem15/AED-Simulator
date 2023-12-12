@@ -12,7 +12,6 @@ class Scenario: public QObject
 {
     Q_OBJECT
 
-
 public:
     Scenario(AED* aed, Patient* p, Battery* b);
     Scenario();

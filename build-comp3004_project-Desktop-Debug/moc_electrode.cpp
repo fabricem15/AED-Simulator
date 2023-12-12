@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Electrodes_t {
-    QByteArrayData data[5];
-    char stringdata0[47];
+    QByteArrayData data[4];
+    char stringdata0[36];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,12 +35,10 @@ static const qt_meta_stringdata_Electrodes_t qt_meta_stringdata_Electrodes = {
 QT_MOC_LITERAL(0, 0, 10), // "Electrodes"
 QT_MOC_LITERAL(1, 11, 10), // "attachPads"
 QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 10), // "removePads"
-QT_MOC_LITERAL(4, 34, 12) // "shockPatient"
+QT_MOC_LITERAL(3, 23, 12) // "shockPatient"
 
     },
-    "Electrodes\0attachPads\0\0removePads\0"
-    "shockPatient"
+    "Electrodes\0attachPads\0\0shockPatient"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,20 +48,18 @@ static const uint qt_meta_data_Electrodes[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       3,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x06 /* Public */,
-       3,    0,   30,    2, 0x06 /* Public */,
-       4,    0,   31,    2, 0x06 /* Public */,
+       1,    0,   24,    2, 0x06 /* Public */,
+       3,    0,   25,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -77,8 +73,7 @@ void Electrodes::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->attachPads(); break;
-        case 1: _t->removePads(); break;
-        case 2: _t->shockPatient(); break;
+        case 1: _t->shockPatient(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -92,15 +87,8 @@ void Electrodes::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         }
         {
             using _t = void (Electrodes::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Electrodes::removePads)) {
-                *result = 1;
-                return;
-            }
-        }
-        {
-            using _t = void (Electrodes::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Electrodes::shockPatient)) {
-                *result = 2;
+                *result = 1;
                 return;
             }
         }
@@ -137,13 +125,13 @@ int Electrodes::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 2)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 2;
     }
     return _id;
 }
@@ -155,15 +143,9 @@ void Electrodes::attachPads()
 }
 
 // SIGNAL 1
-void Electrodes::removePads()
-{
-    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
-}
-
-// SIGNAL 2
 void Electrodes::shockPatient()
 {
-    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

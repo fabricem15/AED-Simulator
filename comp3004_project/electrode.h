@@ -14,22 +14,18 @@ class Electrodes: public QObject
 public:
     Electrodes();
     Electrodes(string patientType);
-//    bool heartAnalysis();
     string getPatientType();
     void setPatientType(string type);
+    void setPlacement(bool placement);
+    bool getPlacement();
 
 signals:
     void attachPads();
-    void removePads();// could merge with the above function and add a parameter instead
-    void shockPatient();// this will emit a signal that the patient class will handle, i.e., send the shock level to the patient and improve the patient condition by some percentage, then update battery as well
-public slots:
-
+    void shockPatient();
 private:
     int heartrate;
-    int compressions;
-    int expirationDate = 20241130;
     bool isConnected;
-    int today = 20231130;
+    bool badPlacement;
     string patientType;
 
 };

@@ -2,6 +2,7 @@
 #define PATIENT_H
 #include "string.h"
 #include <QObject>
+#include <iostream>
 using namespace std;
 
 class Patient: public QObject{

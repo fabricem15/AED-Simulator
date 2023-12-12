@@ -17,21 +17,22 @@ public:
     AED();
     AED(Battery* b, Electrodes* e, Patient* p);
     bool selfTest();
-    int getShockCount();
-    int getActiveButton();
-    int getActiveLightIndex();
-    bool isTurnedOn();
     void checkCompressionDepth();
     void switchPower();
     void checkResponsiveness();
     void callHelp();
     void attachPads();
-
     void sendElectricShock();
     void doCPR();
     void readyToShock();
-    bool isCharged();
+    void reset();
+    void nextStep();
 
+    bool isCharged();
+    int getShockCount();
+    int getActiveButton();
+    int getActiveLightIndex();
+    bool isTurnedOn();
     void setElectrodes(Electrodes* e);
     void setBattery(Battery* b);
     void setPatient(Patient* p);
@@ -60,11 +61,9 @@ private:
     bool isOn;
     int lightNumber;
     bool charged;
-    QTimer* timer;
     Battery* battery;
     Electrodes* electrodes;
     Patient* patient;
-
 };
 
 #endif // AED_H

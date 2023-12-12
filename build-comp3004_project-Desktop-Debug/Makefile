@@ -396,9 +396,9 @@ qrc_resource.cpp: ../comp3004_project/resource.qrc \
 		../comp3004_project/photos/power-on-red.png \
 		../comp3004_project/photos/CPR.png \
 		../comp3004_project/photos/pads.png \
-		../comp3004_project/photos/vt.webp \
 		../comp3004_project/photos/ok.png \
 		../comp3004_project/photos/Heart_icon.svg.png \
+		../comp3004_project/photos/vt.png \
 		../comp3004_project/photos/power-on-black.png \
 		../comp3004_project/photos/PEA.jpg \
 		../comp3004_project/photos/test-failed.png \

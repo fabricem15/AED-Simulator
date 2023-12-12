@@ -1,21 +1,18 @@
 #include "electrode.h"
 
-#include "QThread"
 #include "QtDebug"
 
 
 Electrodes::Electrodes()
 {
-    compressions = 0;
-    heartrate = 180; //adult scenario
     patientType = "adult";
+    badPlacement = false;
 }
 
 Electrodes::Electrodes(string patientType)
 {
-    compressions = 0;
     this->patientType = patientType;
-    heartrate = 180; //adult scenario
+    badPlacement = false;
 }
 
 
@@ -26,8 +23,12 @@ string Electrodes::getPatientType(){
     return patientType;
 }
 
+void Electrodes::setPlacement(bool placement){
+    badPlacement = placement;
+}
 
-//bool Electrodes::heartAnalysis(){
-//    return true;
-//}
+bool Electrodes::getPlacement(){
+    return badPlacement;
+}
+
 
