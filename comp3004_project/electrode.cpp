@@ -4,23 +4,15 @@
 
 
 Electrodes::Electrodes()
-{
-    patientType = "adult";
+{ 
     badPlacement = false;
 }
 
-Electrodes::Electrodes(string patientType)
+Electrodes::Electrodes(bool placement)
 {
-    this->patientType = patientType;
-    badPlacement = false;
+    badPlacement = placement;
 }
 
-void Electrodes::setPatientType(string type){
-    patientType = type;
-}
-string Electrodes::getPatientType(){
-    return patientType;
-}
 
 void Electrodes::setBadPlacement(bool placement){
     badPlacement = placement;

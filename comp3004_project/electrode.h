@@ -13,9 +13,7 @@ class Electrodes: public QObject
 
 public:
     Electrodes();
-    Electrodes(string patientType);
-    string getPatientType();
-    void setPatientType(string type);
+    Electrodes(bool placement);
     void setBadPlacement(bool placement);
     bool getPlacement();
 
@@ -26,7 +24,6 @@ private:
     int heartrate;
     bool isConnected;
     bool badPlacement;
-    string patientType;
 
 };
 #endif // ELECTRODES_H

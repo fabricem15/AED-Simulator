@@ -54,8 +54,6 @@ void Patient::handleShock(){
         bpm += 10;
     }
 
-
-
     setGraph(bpm);
 }
 

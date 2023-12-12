@@ -63,10 +63,7 @@ void AED::analyzeRhythm(){
     emit lightNumberChanged(lightNumber);
 
 
-    if (shockCount == 0)
-    lightNumber++;
-    else
-        lightNumber = 3;
+    lightNumber = 3;
 
 
     emit voicePrompt("DON'T TOUCH PATIENT, ANALYZING");

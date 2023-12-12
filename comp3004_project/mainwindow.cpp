@@ -137,6 +137,7 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(55);
         patient->setWeight(75);
         patient->setBpm(30);
+        patient->setSurvive(true);
         electrodes->setBadPlacement(false);
     }
     else if (scenario == 1){ // child with VT
@@ -146,6 +147,7 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(3);
         patient->setWeight(15);
         patient->setBpm(230);
+        patient->setSurvive(true);
         electrodes->setBadPlacement(false);
     }
     else if(scenario == 2){ // asystole patient not improving
@@ -165,6 +167,7 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(89);
         patient->setWeight(110);
         patient->setBpm(20);
+        patient->setSurvive(true);
         electrodes->setBadPlacement(false);
 
     }
@@ -176,6 +179,7 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(89);
         patient->setWeight(130);
         patient->setBpm(210);
+        patient->setSurvive(true);
         electrodes->setBadPlacement(true);
     }
     else if (scenario == 5){ // unit failed
@@ -185,6 +189,7 @@ void MainWindow::runScenario(int scenario){
         patient->setAge(89);
         patient->setWeight(110);
         patient->setBpm(20);
+        patient->setSurvive(true);
         electrodes->setBadPlacement(false);
     }
 
