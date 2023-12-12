@@ -5,8 +5,11 @@
 #include <QTimer>
 #include <QLabel>
 #include <stdio.h>
+#include <iostream>
+#include <sstream>
 #include "aed.h"
 #include "patient.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

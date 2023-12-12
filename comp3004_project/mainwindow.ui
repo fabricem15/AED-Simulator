@@ -919,19 +919,6 @@
       </property>
      </widget>
     </widget>
-    <widget class="QPushButton" name="run">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>820</y>
-       <width>111</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Run scenario</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="scenarioLbl">
      <property name="geometry">
       <rect>

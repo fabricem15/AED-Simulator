@@ -44,20 +44,16 @@ MainWindow::MainWindow(QWidget *parent)
            electrodes->attachPads();
 
            if (electrodes->getPlacement() == true){
-
                QTimer::singleShot(1000, [this](){
                    setVoicePrompt("BAD PLACEMENT.\nPLEASE ATTACH ELECTRODES.");
                });
-
                electrodes->setPlacement(false);
            }
            else {
-
                if (patient->isAdult())
                    setVoicePrompt("ADULT PADS");
                else
                    setVoicePrompt("CHILD PADS");
-
                QTimer::singleShot(2000, [this](){ aed->analyzeRhythm(); });
            }
        }
@@ -84,16 +80,6 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
 
-
-    for (int i = 0; i < 6; i++){ // set up indicator lights
-        char s[8];
-        sprintf(s, "light%d", i+1);
-        QLabel* lbl= ui->aedWidget->findChild<QLabel*>(s);
-        indicatorLabels.push_back(lbl);
-    }
-
-
-    // start cpr button click
     connect(ui->doCPR, &QPushButton::clicked, [this] (){
         if (aed->getActiveLightIndex() == 5){
             this->ui->cprSlider->setValue(3);
@@ -101,7 +87,6 @@ MainWindow::MainWindow(QWidget *parent)
         }
 
     });
-
 
     connect(ui->cprSlider, &QSlider::valueChanged, [this] (int value){
          if (aed->getActiveLightIndex() == 5 && value < 2){
@@ -111,9 +96,15 @@ MainWindow::MainWindow(QWidget *parent)
              setVoicePrompt("GOOD COMPRESSIONS");
          }
     });
-
-
     connect(aed, &AED::analyzing, [this](){this->ui->cprSlider->setValue(0);});
+
+
+    for (int i = 0; i < 6; i++){ // set up indicator lights
+        char s[8];
+        sprintf(s, "light%d", i+1);
+        QLabel* lbl= ui->aedWidget->findChild<QLabel*>(s);
+        indicatorLabels.push_back(lbl);
+    }
 
 
     QButtonGroup* radioButtons = new QButtonGroup();
@@ -121,20 +112,20 @@ MainWindow::MainWindow(QWidget *parent)
     for (int i = 0; i < ui->scenarioGroupBox->children().size(); i++){
         radioButtons->addButton( qobject_cast<QRadioButton*>(ui->scenarioGroupBox->children().at(i)), i);
     }
-
-
     connect(radioButtons, &QButtonGroup::idClicked, [this, radioButtons] (int id){
         if (!aed->isTurnedOn()){
             cout << id << " is the id of the clicked button" << endl;
 
+            stringstream ss;
+            ss << "Scenario: " << radioButtons->button(id)->text().toStdString();
+
             this->selectedScenario = id;
             this->runScenario(selectedScenario);
-            ui->scenarioLbl->setText(radioButtons->button(id)->text());
+            ui->scenarioLbl->setText(QString::fromStdString(ss.str()));
         }
 
     });
 \
-
 }
 
 void MainWindow::runScenario(int scenario){
@@ -165,14 +156,15 @@ void MainWindow::runScenario(int scenario){
         patient->setWeight(75);
         patient->setBpm(0);
     }
-    else if (scenario==3){
+    else if (scenario==3){ // battery replacement
         // set battery decrease amount to 50
-        //aed-
-
         aed->setBatteryDecreaseAmount(70);
+        patient->setAge(89);
+        patient->setWeight(110);
+        patient->setBpm(40);
 
     }
-    else { //
+    else if (scenario == 4){ //
 
        // electrodes->setPlacement(true);
     }
@@ -194,7 +186,6 @@ void MainWindow::setBattery(int charge){
 void MainWindow::setVoicePrompt(string text){
     ui->voicePrompt->setText(QString::fromStdString(text));
 }
-
 
 
 //  updates the AED timer and flashes the indicator light for the active icon

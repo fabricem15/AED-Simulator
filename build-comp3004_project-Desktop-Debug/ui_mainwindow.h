@@ -77,7 +77,6 @@ public:
     QRadioButton *radioButton_6;
     QRadioButton *radioButton_7;
     QRadioButton *radioButton_8;
-    QPushButton *run;
     QLabel *scenarioLbl;
     QFrame *line_2;
     QMenuBar *menubar;
@@ -371,9 +370,6 @@ public:
         radioButton_8 = new QRadioButton(scenarioGroupBox);
         radioButton_8->setObjectName(QString::fromUtf8("radioButton_8"));
         radioButton_8->setGeometry(QRect(10, 210, 181, 23));
-        run = new QPushButton(slider);
-        run->setObjectName(QString::fromUtf8("run"));
-        run->setGeometry(QRect(280, 820, 111, 31));
         scenarioLbl = new QLabel(slider);
         scenarioLbl->setObjectName(QString::fromUtf8("scenarioLbl"));
         scenarioLbl->setGeometry(QRect(100, 480, 491, 20));
@@ -439,7 +435,6 @@ public:
         radioButton_6->setText(QCoreApplication::translate("MainWindow", "Asystole", nullptr));
         radioButton_7->setText(QCoreApplication::translate("MainWindow", "Battery depletion", nullptr));
         radioButton_8->setText(QCoreApplication::translate("MainWindow", "Electrodes detached", nullptr));
-        run->setText(QCoreApplication::translate("MainWindow", "Run scenario", nullptr));
         scenarioLbl->setText(QString());
     } // retranslateUi
 

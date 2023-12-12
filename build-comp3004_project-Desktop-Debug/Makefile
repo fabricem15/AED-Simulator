@@ -408,8 +408,8 @@ qrc_resource.cpp: ../comp3004_project/resource.qrc \
 		../comp3004_project/photos/don't\ touch.png \
 		../comp3004_project/photos/replace-battery.jpg \
 		../comp3004_project/photos/attach-pads.png \
-		../comp3004_project/photos/asystole.webp \
-		../comp3004_project/photos/911.png
+		../comp3004_project/photos/911.png \
+		../comp3004_project/photos/asystole.png
 	/usr/lib/qt5/bin/rcc -name resource ../comp3004_project/resource.qrc -o qrc_resource.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

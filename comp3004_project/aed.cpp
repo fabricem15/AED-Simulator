@@ -18,7 +18,6 @@ AED::AED(Battery* battery, Electrodes* el, Patient* p){
 void AED::nextStep(){
 
     if (!isOn){
-        cout << "UNIT OFF NOT CALLING NEXT FUNCTIONS" << endl;
         return;
     }
 
@@ -30,6 +29,9 @@ void AED::nextStep(){
     }
     else if (lightNumber == 3){
         readyToShock();
+    }
+    else if (lightNumber == 5){
+        analyzeRhythm();
     }
 
 
@@ -90,21 +92,13 @@ void AED::analyzeRhythm(){
 }
 
 
-void AED::doCPR(){
-    emit lightNumberChanged(lightNumber);
-    lightNumber=5;
-
-    emit voicePrompt("START CPR");
-//    QTimer::singleShot(3000, this, &AED::analyzeRhythm);
-
-}
 
 void AED::cprStarted(){
 
     emit voicePrompt("GOOD COMPRESSIONS");
     patient->handleCPR();
 
-    QTimer::singleShot(10000, this, &AED::analyzeRhythm);
+    QTimer::singleShot(10000, this, &AED::nextStep); // test last here
 }
 
 
@@ -117,13 +111,10 @@ void AED::readyToShock(){
 
 void AED::sendElectricShock(){
 
-
     if (!patient->isShockableHeartRate())
         return;
 
-
      electrodes->shockPatient();
-
 
      patient->handleShock();
 
@@ -131,19 +122,10 @@ void AED::sendElectricShock(){
      shockCountIncreased(shockCount);
 
      battery->decreaseBattery(batteryDecreaseAmount);
-//    if (electrodes->getPatientType() == "adult"){
-
-
-//    }
-//    else {
-//        battery->decreaseBattery(5);
-//    }
-
     if (battery->getCharge() <= 20){
         handleLowBattery();
         return;
     }
-
 
 
     emit this->voicePrompt("SHOCK DELIVERED");
@@ -154,17 +136,26 @@ void AED::sendElectricShock(){
 }
 
 
+
+void AED::doCPR(){
+    emit lightNumberChanged(lightNumber);
+    lightNumber=5;
+
+    emit voicePrompt("START CPR");
+//    QTimer::singleShot(3000, this, &AED::analyzeRhythm);
+
+}
+
+
+
+
 bool AED::selfTest(){
-
-
     if (battery->selfTest()){
-
-        cout << "Self test passed, unit ok" << endl;
 
         emit voicePrompt("UNIT OK");
         emit selfTestPassed(true);
-         QTimer::singleShot(2000, this, &AED::checkResponsiveness);
-         return true;
+        QTimer::singleShot(2000, this, &AED::checkResponsiveness);
+        return true;
     }
     else {
         emit selfTestPassed(false);
@@ -231,14 +222,9 @@ void AED::replaceBattery(){
 
 
 void AED::reset(){
-
     //emit lightNumberChanged(lightNumber);
     lightNumber = 0;
     isOn = false;
-
-
-
-
     shockCount = 0;
     batteryDecreaseAmount = 0;
     charged = true;
@@ -276,7 +262,6 @@ int AED::getActiveLightIndex(){
 int AED::getShockCount(){
     return shockCount;
 }
-
 
 bool AED::isTurnedOn(){
     return isOn;
