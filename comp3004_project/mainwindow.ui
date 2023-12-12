@@ -935,7 +935,20 @@
     <widget class="QLabel" name="scenarioLbl">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>50</x>
+       <y>340</y>
+       <width>491</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="errorLbl">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
        <y>480</y>
        <width>491</width>
        <height>20</height>

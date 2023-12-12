@@ -25,7 +25,6 @@ public:
     void sendElectricShock();
     void doCPR();
     void readyToShock();
-    void reset();
     void nextStep();
 
     bool isCharged();

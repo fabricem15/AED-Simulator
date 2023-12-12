@@ -68,8 +68,8 @@ MainWindow::MainWindow(QWidget *parent)
             this->switchPowerBtn();
         }
         else {
-            ui->scenarioLbl->setText("Please select a scenario before turning the AED on.");
-            ui->scenarioLbl->setStyleSheet("color:red");
+            ui->errorLbl->setText("Please select a scenario before turning the AED on.");
+            ui->errorLbl->setStyleSheet("color:red");
         }
     });
 
@@ -121,6 +121,8 @@ MainWindow::MainWindow(QWidget *parent)
             this->selectedScenario = id;
             this->runScenario(selectedScenario);
             ui->scenarioLbl->setText(QString::fromStdString(ss.str()));
+
+            ui->errorLbl->hide();
         }
 
     });
@@ -130,9 +132,8 @@ MainWindow::MainWindow(QWidget *parent)
 void MainWindow::runScenario(int scenario){
 
     if (scenario == 0){ // adult with VF
-
         aed->setBatteryDecreaseAmount(10);
-
+        battery->setBattery(100);
         patient->setAge(55);
         patient->setWeight(75);
         patient->setBpm(30);
@@ -141,7 +142,7 @@ void MainWindow::runScenario(int scenario){
     else if (scenario == 1){ // child with VT
 
         aed->setBatteryDecreaseAmount(5);
-
+        battery->setBattery(100);
         patient->setAge(3);
         patient->setWeight(15);
         patient->setBpm(230);
@@ -150,15 +151,16 @@ void MainWindow::runScenario(int scenario){
     else if(scenario == 2){ // asystole patient not improving
 
         aed->setBatteryDecreaseAmount(10);
+        battery->setBattery(100);
         patient->setAge(40);
         patient->setWeight(75);
-
         patient->setBpm(210);
         patient->setSurvive(false);
         electrodes->setBadPlacement(false);
 
     }
     else if (scenario==3){ // battery replacement
+        battery->setBattery(100);
         aed->setBatteryDecreaseAmount(70);
         patient->setAge(89);
         patient->setWeight(110);
@@ -204,7 +206,6 @@ void MainWindow::setVoicePrompt(string text){
 }
 
 
-//  updates the AED timer and flashes the indicator light for the active icon
 void MainWindow::updateTime(){
     timeElapsed++;
     int minutes = timeElapsed / 60;
@@ -242,6 +243,7 @@ void MainWindow::showStatusIndicator(bool passedTest){
         ui->shockCount->show();
         ui->shockLbl->show();
         ui->elapsedTime->show();
+        setBattery(battery->getCharge());
     }
     else {
         ui->testFailed->show();
@@ -255,7 +257,6 @@ void MainWindow::switchPowerBtn(){
          aed->blockSignals(false);
          ui->voicePrompt->show();
 
-         //setBattery(battery->getCharge());// reset it at 0
     }
 
     else {
@@ -275,7 +276,6 @@ void MainWindow::switchPowerBtn(){
 
 
          turnOffPreviousLight(aed->getActiveLightIndex());
-         aed->reset();
 
          ui->voicePrompt->setText("");
          ui->voicePrompt->hide();
@@ -289,4 +289,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-

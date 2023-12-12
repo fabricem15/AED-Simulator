@@ -45,7 +45,6 @@ bool Patient::isShockableHeartRate(){
 void Patient::handleShock(){
 
     if (!willSurvive){
-
         bpm = 0;
     }
     else if (bpm > 180){

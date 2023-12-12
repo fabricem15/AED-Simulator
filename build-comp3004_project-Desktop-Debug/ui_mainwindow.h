@@ -79,6 +79,7 @@ public:
     QRadioButton *radioButton_8;
     QRadioButton *radioButton_9;
     QLabel *scenarioLbl;
+    QLabel *errorLbl;
     QFrame *line_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -376,7 +377,10 @@ public:
         radioButton_9->setGeometry(QRect(10, 250, 181, 23));
         scenarioLbl = new QLabel(slider);
         scenarioLbl->setObjectName(QString::fromUtf8("scenarioLbl"));
-        scenarioLbl->setGeometry(QRect(100, 480, 491, 20));
+        scenarioLbl->setGeometry(QRect(50, 340, 491, 20));
+        errorLbl = new QLabel(slider);
+        errorLbl->setObjectName(QString::fromUtf8("errorLbl"));
+        errorLbl->setGeometry(QRect(30, 480, 491, 20));
         line_2 = new QFrame(centralwidget);
         line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setGeometry(QRect(220, 1020, 16, 71));
@@ -441,6 +445,7 @@ public:
         radioButton_8->setText(QCoreApplication::translate("MainWindow", "Electrodes detached", nullptr));
         radioButton_9->setText(QCoreApplication::translate("MainWindow", "Self-test failed", nullptr));
         scenarioLbl->setText(QString());
+        errorLbl->setText(QString());
     } // retranslateUi
 
 };
