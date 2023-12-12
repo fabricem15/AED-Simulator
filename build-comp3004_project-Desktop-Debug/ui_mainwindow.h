@@ -88,12 +88,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(1435, 1088);
+        MainWindow->resize(1431, 1100);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         aedWidget = new QWidget(centralwidget);
         aedWidget->setObjectName(QString::fromUtf8("aedWidget"));
-        aedWidget->setGeometry(QRect(-10, 0, 871, 1181));
+        aedWidget->setGeometry(QRect(-10, -10, 871, 1181));
         aedWidget->setStyleSheet(QString::fromUtf8("background-color:#737889;"));
         widget_2 = new QWidget(aedWidget);
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
@@ -391,7 +391,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1435, 22));
+        menubar->setGeometry(QRect(0, 0, 1431, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));

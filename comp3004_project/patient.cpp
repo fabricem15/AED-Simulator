@@ -76,19 +76,35 @@ void Patient::setGraph(int rhythm){
 
     string url = "";
 
-    if (rhythm == 0){
-        url = ":/resources/photos/asystole.png";
+    if (isChild()){
+        if (rhythm == 0){
+            url = ":/resources/photos/asystole.png";
+        }
+        else if (rhythm > 0 && rhythm < 70){
+            url = ":/resources/photos/vf.png";
+        }
+        else if (rhythm >= 70 && rhythm < 200){
+            url = ":/resources/photos/PEA.jpg";
+        }
+        else {
+            url = ":/resources/photos/vt.png";
+        }
     }
-    else if (rhythm > 0 && rhythm < 60){
-        url = ":/resources/photos/vf.png";
+    else{
+        if (rhythm == 0){
+            url = ":/resources/photos/asystole.png";
+        }
+        else if (rhythm > 0 && rhythm < 60){
+            url = ":/resources/photos/vf.png";
+        }
+        else if (rhythm >= 60 && rhythm < 150){
+            url = ":/resources/photos/PEA.jpg";
+        }
+        else {
+            url = ":/resources/photos/vt.png";
+        }
     }
-    else if (rhythm >= 60 && rhythm < 150){
-        url = ":/resources/photos/PEA.jpg";
-    }
-    else {
 
-        url = ":/resources/photos/vt.png";
-    }
 
     if (url != rhythmGraph){
         rhythmGraph = url;
@@ -114,7 +130,9 @@ void Patient::setAge(int age){
 void Patient::setWeight(int weight){
     this->weight = weight;
 }
-
+void Patient::setRhythm(string rhythm){
+    rhythmGraph = rhythm;
+}
 void Patient::setBpm(int bpm)
 {
     this->bpm = bpm;

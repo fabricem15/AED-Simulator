@@ -146,7 +146,7 @@ void MainWindow::runScenario(int scenario){
         battery->setBattery(100);
         patient->setAge(3);
         patient->setWeight(15);
-        patient->setBpm(230);
+        patient->setBpm(229);
         patient->setSurvive(true);
         electrodes->setBadPlacement(false);
     }
@@ -278,6 +278,7 @@ void MainWindow::switchPowerBtn(){
          ui->elapsedTime->setText(QString::fromStdString("00: 00"));
 
          ui->graph->clear();
+         patient->setRhythm("");
 
 
          turnOffPreviousLight(aed->getActiveLightIndex());

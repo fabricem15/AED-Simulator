@@ -20,6 +20,7 @@ class Patient: public QObject{
         void setAge(int age);
         void setWeight(int weight);
         void setBpm(int bpm);
+        void setRhythm(string rhythm);
         void setSurvive(bool survive);
         bool getSurvive();
 

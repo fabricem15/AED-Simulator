@@ -57,30 +57,24 @@ SOURCES       = ../comp3004_project/aed.cpp \
 		../comp3004_project/electrode.cpp \
 		../comp3004_project/main.cpp \
 		../comp3004_project/mainwindow.cpp \
-		../comp3004_project/patient.cpp \
-		../comp3004_project/scenario.cpp \
-		../comp3004_project/voiceprompts.cpp qrc_resource.cpp \
+		../comp3004_project/patient.cpp qrc_resource.cpp \
 		moc_aed.cpp \
 		moc_battery.cpp \
 		moc_electrode.cpp \
 		moc_mainwindow.cpp \
-		moc_patient.cpp \
-		moc_scenario.cpp
+		moc_patient.cpp
 OBJECTS       = aed.o \
 		battery.o \
 		electrode.o \
 		main.o \
 		mainwindow.o \
 		patient.o \
-		scenario.o \
-		voiceprompts.o \
 		qrc_resource.o \
 		moc_aed.o \
 		moc_battery.o \
 		moc_electrode.o \
 		moc_mainwindow.o \
-		moc_patient.o \
-		moc_scenario.o
+		moc_patient.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -163,16 +157,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../comp3004_project/battery.h \
 		../comp3004_project/electrode.h \
 		../comp3004_project/mainwindow.h \
-		../comp3004_project/patient.h \
-		../comp3004_project/scenario.h \
-		../comp3004_project/voiceprompts.h ../comp3004_project/aed.cpp \
+		../comp3004_project/patient.h ../comp3004_project/aed.cpp \
 		../comp3004_project/battery.cpp \
 		../comp3004_project/electrode.cpp \
 		../comp3004_project/main.cpp \
 		../comp3004_project/mainwindow.cpp \
-		../comp3004_project/patient.cpp \
-		../comp3004_project/scenario.cpp \
-		../comp3004_project/voiceprompts.cpp
+		../comp3004_project/patient.cpp
 QMAKE_TARGET  = comp3004_project
 DESTDIR       = 
 TARGET        = comp3004_project
@@ -361,8 +351,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../comp3004_project/resource.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../comp3004_project/aed.h ../comp3004_project/battery.h ../comp3004_project/electrode.h ../comp3004_project/mainwindow.h ../comp3004_project/patient.h ../comp3004_project/scenario.h ../comp3004_project/voiceprompts.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../comp3004_project/aed.cpp ../comp3004_project/battery.cpp ../comp3004_project/electrode.cpp ../comp3004_project/main.cpp ../comp3004_project/mainwindow.cpp ../comp3004_project/patient.cpp ../comp3004_project/scenario.cpp ../comp3004_project/voiceprompts.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../comp3004_project/aed.h ../comp3004_project/battery.h ../comp3004_project/electrode.h ../comp3004_project/mainwindow.h ../comp3004_project/patient.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../comp3004_project/aed.cpp ../comp3004_project/battery.cpp ../comp3004_project/electrode.cpp ../comp3004_project/main.cpp ../comp3004_project/mainwindow.cpp ../comp3004_project/patient.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../comp3004_project/mainwindow.ui $(DISTDIR)/
 
 
@@ -418,9 +408,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_aed.cpp moc_battery.cpp moc_electrode.cpp moc_mainwindow.cpp moc_patient.cpp moc_scenario.cpp
+compiler_moc_header_make_all: moc_aed.cpp moc_battery.cpp moc_electrode.cpp moc_mainwindow.cpp moc_patient.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_aed.cpp moc_battery.cpp moc_electrode.cpp moc_mainwindow.cpp moc_patient.cpp moc_scenario.cpp
+	-$(DEL_FILE) moc_aed.cpp moc_battery.cpp moc_electrode.cpp moc_mainwindow.cpp moc_patient.cpp
 moc_aed.cpp: ../comp3004_project/aed.h \
 		../comp3004_project/battery.h \
 		../comp3004_project/electrode.h \
@@ -452,15 +442,6 @@ moc_patient.cpp: ../comp3004_project/patient.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/patient.h -o moc_patient.cpp
-
-moc_scenario.cpp: ../comp3004_project/scenario.h \
-		../comp3004_project/aed.h \
-		../comp3004_project/battery.h \
-		../comp3004_project/electrode.h \
-		../comp3004_project/patient.h \
-		moc_predefs.h \
-		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /media/sf_COMP3004/COMP3004-Project/build-comp3004_project-Desktop-Debug/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/media/sf_COMP3004/COMP3004-Project/comp3004_project -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../comp3004_project/scenario.h -o moc_scenario.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -513,16 +494,6 @@ mainwindow.o: ../comp3004_project/mainwindow.cpp ../comp3004_project/mainwindow.
 patient.o: ../comp3004_project/patient.cpp ../comp3004_project/patient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o patient.o ../comp3004_project/patient.cpp
 
-scenario.o: ../comp3004_project/scenario.cpp ../comp3004_project/scenario.h \
-		../comp3004_project/aed.h \
-		../comp3004_project/battery.h \
-		../comp3004_project/electrode.h \
-		../comp3004_project/patient.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scenario.o ../comp3004_project/scenario.cpp
-
-voiceprompts.o: ../comp3004_project/voiceprompts.cpp ../comp3004_project/voiceprompts.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o voiceprompts.o ../comp3004_project/voiceprompts.cpp
-
 qrc_resource.o: qrc_resource.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resource.o qrc_resource.cpp
 
@@ -540,9 +511,6 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_patient.o: moc_patient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_patient.o moc_patient.cpp
-
-moc_scenario.o: moc_scenario.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_scenario.o moc_scenario.cpp
 
 ####### Install
 

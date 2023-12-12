@@ -14,18 +14,14 @@ SOURCES += \
     electrode.cpp \
     main.cpp \
     mainwindow.cpp \
-    patient.cpp \
-    scenario.cpp \
-    voiceprompts.cpp
+    patient.cpp
 
 HEADERS += \
     aed.h \
     battery.h \
     electrode.h \
     mainwindow.h \
-    patient.h \
-    scenario.h \
-    voiceprompts.h
+    patient.h
 
 FORMS += \
     mainwindow.ui
