@@ -23,6 +23,8 @@ https://youtu.be/VmMG_T7sNn0
 - Open Qt Creator and navigate to the folder location
 - Run the program in Qt to see the GUI
 
+**Note that it is recommended to use a monitor screen to see the full GUI window. You might have scaling issues when running it on a regular laptop screen.**
+
 ## Classes 
 - AED
 - Electrodes
