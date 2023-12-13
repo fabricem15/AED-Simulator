@@ -1,6 +1,7 @@
 # COMP3004 group project
 Implementation of an AED simulation using Qt Designer and C++. Users can select one of various scenarios and test how the device responds to the patient's condition.
 
+## Youtube link
 ## Team members
 - Yasmin Hersi
   - State diagram
