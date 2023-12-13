@@ -31,5 +31,7 @@ https://youtu.be/VmMG_T7sNn0
 - Mainwindow
 
 ## Repository organization
-- comp3004-project
+- comp3004_project: folder with the header files and source code
+  - photos: folder for the GUI icons
+- build-comp3004-project: object files and executables  
 
