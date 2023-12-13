@@ -17,6 +17,12 @@ https://youtu.be/VmMG_T7sNn0
   - UML
   - UI
   - Program logic
+
+## Instructions 
+- Download or clone the source code in the VM
+- Open Qt Creator and navigate to the folder location
+- Run the program in Qt to see the GUI
+
 ## Classes 
 - AED
 - Electrodes
@@ -25,3 +31,5 @@ https://youtu.be/VmMG_T7sNn0
 - Mainwindow
 
 ## Repository organization
+- comp3004-project
+
