@@ -1,4 +1,5 @@
 # COMP3004 group project
+Implementation of an AED simulation using Qt Designer and C++.
 
 ## Team members
 - Yasmin Hersi
