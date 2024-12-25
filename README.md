@@ -1,5 +1,5 @@
-# COMP3004 group project
-Implementation of an AED simulation using Qt Designer and C++. Users can select one of various scenarios and test how the device responds to the patient's condition.
+# AED Simulator
+Implementation of an Automated External Defibrillator simulator using Qt Designer and C++. The system allows users to select several test cases and simulate device interaction based on various patients' conditions.
 
 ## Youtube link
 https://youtu.be/VmMG_T7sNn0
