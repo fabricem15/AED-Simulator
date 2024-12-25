@@ -18,22 +18,10 @@ https://youtu.be/VmMG_T7sNn0
   - UI
   - Program logic
 
-## Instructions 
+## Setup Instructions 
 - Download or clone the source code in the VM
 - Open Qt Creator and navigate to the folder location
 - Run the program in Qt to see the GUI
 
 **Note that it is recommended to use a monitor screen to see the full GUI window. You might have scaling issues when running it on a regular laptop screen.**
-
-## Classes 
-- AED
-- Electrodes
-- Battery
-- Patient
-- Mainwindow
-
-## Repository organization
-- comp3004_project: folder with the header files and source code
-  - photos: folder for the GUI icons
-- build-comp3004_project-Desktop-Debug: object files and executables  
 
