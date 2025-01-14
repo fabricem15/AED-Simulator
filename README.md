@@ -19,9 +19,9 @@ https://youtu.be/VmMG_T7sNn0
   - Program logic
 
 ## Setup Instructions 
-- Download or clone the source code in the VM
-- Open Qt Creator and navigate to the folder location
-- Run the program in Qt to see the GUI
+1. Download or clone the source code in the VM
+2. Open Qt Creator and navigate to the folder location
+3. Run the program in Qt to see the GUI
 
 **Note that it is recommended to use a monitor screen to see the full GUI window. You might have scaling issues when running it on a regular laptop screen.**
 
