@@ -1,4 +1,5 @@
 # AED Simulator
+## Overview
 Implementation of an Automated External Defibrillator simulator using Qt Designer and C++. The system allows users to select several test cases and simulate device interaction based on various patients' conditions.
 
 ###  Design decisions
