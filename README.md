@@ -1,6 +1,6 @@
 # AED Simulator
 ## Overview
-This project is an implementation of an Automated External Defibrillator simulator using C++ and Qt Designer to help first responders and healthcare practitioners learn how to use a defibrillator. The system enables users to select multiple test cases and simulate device interaction based on various patient conditions.
+This project is an implementation of an Automated External Defibrillator (AED) simulator, developed using C++ and Qt Designer, to assist first responders and healthcare practitioners in learning how to use a defibrillator. The system enables users to select multiple test cases and simulate device interaction based on various patient conditions.
 
 ###  Design decisions
 
@@ -31,19 +31,6 @@ Our GUI features a high-fidelity prototype of the AED device that allows the use
 
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/523aa401-019f-4a0e-8ee6-b2ceae6ffa19" />
 
-## Contributions
-- Yasmin Hersi
-  - State diagram
-  - Program logic
-  - Traceability matrix
-- Fatima Ferdous
-  - Use cases
-  - Program logic
-  - Sequence diagram  
-- Fabrice Mikobi
-  - UML
-  - UI
-  - Program logic
 
 ## Setup Instructions 
 1. Download or clone the source code in a Linux environment
@@ -51,3 +38,9 @@ Our GUI features a high-fidelity prototype of the AED device that allows the use
 3. Launch the program in Qt to interact with the GUI and run the simulation
 
 **Note that it is recommended to use a larger screen to see the full GUI window. You may run into scaling issues when running it on a regular laptop screen.**
+
+## Contributions
+- Fabrice Mikobi: UML, UI, Program Logic
+- Yasmin Hersi: State Diagram, Traceability Matrix, Program Logic
+- Fatima Ferdous: Use Case Diagram, Sequence Diagram, Program Logic 
+
