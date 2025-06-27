@@ -40,7 +40,7 @@ Our GUI features a high-fidelity prototype of the AED device that allows the use
 **Note that it is recommended to use a larger screen to see the full GUI window. You may run into scaling issues when running it on a regular laptop screen.**
 
 ## Contributions
-- Fabrice Mikobi: UML, UI, Program Logic
-- Yasmin Hersi: State Diagram, Traceability Matrix, Program Logic
-- Fatima Ferdous: Use Case Diagram, Sequence Diagram, Program Logic 
+1.Fabrice Mikobi: UML, UI, Program Logic
+2.Yasmin Hersi: State Diagram, Traceability Matrix, Program Logic
+3.Fatima Ferdous: Use Case Diagram, Sequence Diagram, Program Logic 
 
