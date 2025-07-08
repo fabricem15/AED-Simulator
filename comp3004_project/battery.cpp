@@ -4,7 +4,6 @@ Battery::Battery(){
     charge = 100;
 }
 
-
 void Battery::decreaseBattery(int amount){
     charge -= amount;
     
@@ -15,7 +14,6 @@ void Battery::decreaseBattery(int amount){
    if (charge <= 20){
        emit lowBattery();
    }
-
    emit batteryChanged(charge);
 }
 
@@ -32,7 +30,6 @@ void Battery::setBattery(int charge){
 int Battery::getCharge(){
     return charge;
 }
-
 
 bool Battery::selfTest(){
     return charge >= 20;
