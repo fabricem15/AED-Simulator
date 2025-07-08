@@ -1,7 +1,5 @@
 #include "electrode.h"
-
 #include "QtDebug"
-
 
 Electrodes::Electrodes()
 { 
@@ -13,7 +11,6 @@ Electrodes::Electrodes(bool placement)
     badPlacement = placement;
 }
 
-
 void Electrodes::setBadPlacement(bool placement){
     badPlacement = placement;
 }
@@ -21,5 +18,3 @@ void Electrodes::setBadPlacement(bool placement){
 bool Electrodes::getPlacement(){
     return badPlacement;
 }
-
-
