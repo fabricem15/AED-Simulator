@@ -1,6 +1,5 @@
 #include "patient.h"
 
-
 Patient::Patient(){
     weight = 60;
     age = 54;
@@ -29,7 +28,6 @@ bool Patient::isAdult(){
     return false;
 }
 
-
 bool Patient::isShockableHeartRate(){
     if (bpm == 0){
         return false;
@@ -43,7 +41,6 @@ bool Patient::isShockableHeartRate(){
 }
 
 void Patient::handleShock(){
-
     if (!willSurvive){
         bpm = 0;
     }
@@ -53,12 +50,10 @@ void Patient::handleShock(){
     else {
         bpm += 10;
     }
-
     setGraph(bpm);
 }
 
 void Patient::handleCPR(){
-
     if (bpm > 180){
         bpm -= 5;
     } 
@@ -68,12 +63,10 @@ void Patient::handleCPR(){
     else {
         bpm = 0;
     }
-
     setGraph(bpm);
 }
 
 void Patient::setGraph(int rhythm){
-
     string url = "";
 
     if (isChild()){
@@ -90,7 +83,7 @@ void Patient::setGraph(int rhythm){
             url = ":/resources/photos/vt.png";
         }
     }
-    else{
+    else {
         if (rhythm == 0){
             url = ":/resources/photos/asystole.png";
         }
@@ -105,25 +98,22 @@ void Patient::setGraph(int rhythm){
         }
     }
 
-
     if (url != rhythmGraph){
         rhythmGraph = url;
         emit newRhythm(rhythmGraph);
     }
+}
 
+bool Patient::getSurvive(){
+    return willSurvive;
+}
+int Patient::getRhythm(){
+    return bpm;
 }
 
 void Patient::setSurvive(bool survive){
     willSurvive = survive;
 }
-bool Patient::getSurvive(){
-    return willSurvive;
-}
-
-int Patient::getRhythm(){
-    return bpm;
-}
-
 void Patient::setAge(int age){
     this->age = age;
 }
@@ -137,6 +127,3 @@ void Patient::setBpm(int bpm)
 {
     this->bpm = bpm;
 }
-
-
-
