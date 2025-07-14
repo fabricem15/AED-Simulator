@@ -1,6 +1,8 @@
 # AED Simulator
 ## Overview
-This project is an implementation of an Automated External Defibrillator (AED) simulator, developed using C++ and Qt Designer, to assist first responders and healthcare practitioners in learning how to use a defibrillator. The system enables users to select multiple test cases and simulate device interaction based on various patient conditions.
+
+This project is an implementation of an Automated External Defibrillator (AED) simulator developed using C++ and Qt Designer to help first responders and healthcare practitioners learn how to use a defibrillator. Through this simulation, rescuers can practice using a defibrillator and gain proficiency with all the different scenarios that may arise for a patient requiring cardiac assistance. Based on the Zoll AED Plus instruction manual, we modelled the essential features and use cases of a defibrillator in our application in order to provide a high level of fidelity between simulation and real-world practice.
+
 
 ###  Design decisions
 
