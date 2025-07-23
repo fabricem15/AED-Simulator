@@ -1,22 +1,66 @@
 # AED Simulator
 ## Overview
 
-This project is an implementation of an Automated External Defibrillator (AED) simulator developed using C++ and Qt Designer to help first responders and healthcare practitioners learn how to use a defibrillator. Through this simulation, rescuers can practice using a defibrillator and gain proficiency with all the different scenarios that may arise for a patient requiring cardiac assistance. We modelled the essential features and use cases of a defibrillator in our application ased on the Zoll AED Plus instruction manual in order to provide a high level of fidelity between simulation and real-world practice.
+This project is an implementation of an Automated External Defibrillator (AED) simulator developed using C++ and Qt Designer to help first responders and healthcare practitioners learn how to use a defibrillator. Through this simulation, rescuers can practice using a defibrillator and gain proficiency with all the different scenarios that may arise for a patient requiring cardiac assistance. We modelled the essential features and use cases of a defibrillator in our application based on the Zoll AED Plus instruction manual in order to provide a high level of fidelity between simulation and real-world practice.
+
+## Functional Requirements & Features 
+
+1. **The AED Application interface contains buttons, indicator light, audio, and display**.
+   
+The Qt's MainWindow connects the slots to the
+function that will simulate its behaviour. The
+mouse allows users to press the buttons to see
+the display flash different messages and hear
+audio prompts. One button simulates the
+electrode pads being put on patient.
+
+2. **The battery of the AED is dependent upon the number of shocks emitted and the patient type.**
+
+The application has buttons to press, which
+decides the scenario of the patient. The
+battery depletes whenever a shock is given,
+and since more power is needed for an adult,
+the battery depletes faster when an adult
+receives the shock compared to a child.
+
+3. **A timer is displayed and starts as soon as the AED powers on until the AED powers off.**
+
+The MainWindow class has a little timer using
+QTimer that keeps track of how long the
+treatment takes until the AED is done or the
+battery dies.
+
+4. **The AED's battery must be replaced when the battery is depleted or the self-test fails.**
+   
+The MainWindow class has a button
+designated for replacing batteries which links
+to a function that sets the battery percentage
+back to 100%.
+
+5. **The AED application provides real-time CPR feedback.**
+
+The application provides visual and audible
+feedback on the quality and rate if chest
+compressions during CPR. If the compressions
+are less than two inches then the display will
+say to "push harder."
+
+6. **The AED's electrode analyzes the patient's heart rhythm to determine a shockable rhythm.**
+
+The electrode pads monitor the heart's
+electrical activity to determine whether a
+shockable rhythm is present. The shockable
+rhythm is ventricular fibrillation and ventricular
+tachycardia.
+
+7. **The AED delivers a shock after a shockable rhythm is identified with different intensity levels.**
+
+The AED's pads will analyze the heart rhythm,
+and depending on whether the patient is an
+adult or a child it will deliver a shock of higher
+or lower intensity.
 
 
-###  Design decisions
-
-***Classes***
-
-We decided to encapsulate the behaviour of an AED in 3 classes: the AED, Battery, and Electrodes. The Battery class sends signals to the AED when its charge drops below an operational amount and receives instructions from the AED class to deplete itself after every shock. Secondly, the Electrodes class is used to detect the placement of electrodes and send electric shocks to the patient as instructed by the AED. Lastly, the AED class guides the user through each stage of the resuscitation process using voice prompts on a display and tells the user what to do based on the patient’s heart rhythm. Furthermore, the AED performs checks to ensure that the battery is sufficiently charged to deliver the shocks and that the electrodes are properly placed on the patient’s bare chest to resuscitate them. The battery and electrodes classes are included in the AED as member variables so that it can easily check the state of each class and display the appropriate voice prompt. We also created a Patient class to simulate all the different conditions a patient can be in, such as the shockable and non-shockable heart rhythms, resuscitation and flatlining, and the adult or child type. 
-
-***Design patterns***
-
-We implemented the Observer design pattern using Qt’s signals and slots mechanism. For the most part, the MainWindow class is the subscriber that updates the user interface based on signals from the patient, battery, electrodes, and AED. Every other class is a publisher that sends messages to the MainWindow. This allowed us to handle the logic separately in each class and send a signal to update the UI after the internal state changes. 
-
-
-## Sequence diagram 
-![COMP3004_finalproject_UMLdiagram drawio](https://github.com/user-attachments/assets/8c253f33-bf3b-4565-9afe-75fa05f14652)
 
 ## Demo video
 https://youtu.be/VmMG_T7sNn0
